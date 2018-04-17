@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20262AB22084ECCB00C77588 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AB12084ECCB00C77588 /* SignInViewController.swift */; };
+		20262AB42084ECD200C77588 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AB32084ECD200C77588 /* SignUpViewController.swift */; };
+		20262AB72085073C00C77588 /* DevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AB62085073C00C77588 /* DevicesTableViewController.swift */; };
+		20262AB92085074800C77588 /* ClientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AB82085074800C77588 /* ClientsTableViewController.swift */; };
+		20262ABB2085075A00C77588 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262ABA2085075A00C77588 /* UserViewController.swift */; };
+		20262AC720853C6900C77588 /* UIViewController+ErrorPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AC620853C6900C77588 /* UIViewController+ErrorPresentation.swift */; };
+		20262AC920853F7500C77588 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AC820853F7500C77588 /* DeviceViewController.swift */; };
+		20262ACB20853F7B00C77588 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262ACA20853F7B00C77588 /* ClientViewController.swift */; };
+		20262ACD20857CD800C77588 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262ACC20857CD800C77588 /* InitialViewController.swift */; };
+		205F88442075883700D326DE /* ExampleCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205F88432075883700D326DE /* ExampleCommandHandler.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -28,14 +37,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13E6FBD2B5F322B04B2FB4C5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		13E6FBD2B5F322B04B2FB4C5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		20262AB12084ECCB00C77588 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		20262AB32084ECD200C77588 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		20262AB62085073C00C77588 /* DevicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesTableViewController.swift; sourceTree = "<group>"; };
+		20262AB82085074800C77588 /* ClientsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsTableViewController.swift; sourceTree = "<group>"; };
+		20262ABA2085075A00C77588 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		20262AC620853C6900C77588 /* UIViewController+ErrorPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorPresentation.swift"; sourceTree = "<group>"; };
+		20262AC820853F7500C77588 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
+		20262ACA20853F7B00C77588 /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
+		20262ACC20857CD800C77588 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		205F88432075883700D326DE /* ExampleCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCommandHandler.swift; sourceTree = "<group>"; };
+		20FB6F2D208698F400DAA96D /* ThinCloud_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThinCloud_Example.entitlements; sourceTree = "<group>"; };
 		30EF7C753F1987B2121FA691 /* Pods_ThinCloud_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThinCloud_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0518FA1F3406E21A65861D /* Pods-ThinCloud_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B17D15CE4CE26538A671B2A /* Pods_ThinCloud_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThinCloud_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* ThinCloud_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThinCloud_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -43,9 +62,9 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		939B9697D5DB4EFD6D3147B9 /* Pods-ThinCloud_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		CEF4E4FD507CCF414C101DD3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		CEF4E4FD507CCF414C101DD3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EFBF2124C11CE6A319A5CD37 /* Pods-ThinCloud_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		F71A16FA47D22209431C5453 /* ThinCloud.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ThinCloud.podspec; path = ../ThinCloud.podspec; sourceTree = "<group>"; };
+		F71A16FA47D22209431C5453 /* ThinCloud.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ThinCloud.podspec; path = ../ThinCloud.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FE07B7A4D42606FFCC7DDBA4 /* Pods-ThinCloud_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +88,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20262AB52085071F00C77588 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				20262ACC20857CD800C77588 /* InitialViewController.swift */,
+				20262AB12084ECCB00C77588 /* SignInViewController.swift */,
+				20262AB32084ECD200C77588 /* SignUpViewController.swift */,
+				20262AB62085073C00C77588 /* DevicesTableViewController.swift */,
+				20262AC820853F7500C77588 /* DeviceViewController.swift */,
+				20262ABA2085075A00C77588 /* UserViewController.swift */,
+				20262AB82085074800C77588 /* ClientsTableViewController.swift */,
+				20262ACA20853F7B00C77588 /* ClientViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		20262ACE20857F1200C77588 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				20262AC620853C6900C77588 /* UIViewController+ErrorPresentation.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
 		4BA33FE3CD07234AD6CD8EBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +125,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				20FB6F2D208698F400DAA96D /* ThinCloud_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for ThinCloud */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -104,8 +147,10 @@
 		607FACD21AFB9204008FA782 /* Example for ThinCloud */ = {
 			isa = PBXGroup;
 			children = (
+				20262ACE20857F1200C77588 /* Misc */,
+				20262AB52085071F00C77588 /* View Controllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				205F88432075883700D326DE /* ExampleCommandHandler.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -167,6 +212,7 @@
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ThinCloud_Example" */;
 			buildPhases = (
 				F740E2C9B553804828E1A830 /* [CP] Check Pods Manifest.lock */,
+				205F88332073FC2A00D326DE /* SwiftLint */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
@@ -210,12 +256,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 34LW86BQZ4;
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -282,6 +337,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		205F88332073FC2A00D326DE /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		2B1FB6AA2B30793596319BF8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,10 +373,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ThinCloud/ThinCloud.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ThinCloud.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,8 +446,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				20262ABB2085075A00C77588 /* UserViewController.swift in Sources */,
+				20262AC720853C6900C77588 /* UIViewController+ErrorPresentation.swift in Sources */,
+				20262ACD20857CD800C77588 /* InitialViewController.swift in Sources */,
+				20262AB22084ECCB00C77588 /* SignInViewController.swift in Sources */,
+				20262ACB20853F7B00C77588 /* ClientViewController.swift in Sources */,
+				205F88442075883700D326DE /* ExampleCommandHandler.swift in Sources */,
+				20262AB72085073C00C77588 /* DevicesTableViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				20262AB92085074800C77588 /* ClientsTableViewController.swift in Sources */,
+				20262AB42084ECD200C77588 /* SignUpViewController.swift in Sources */,
+				20262AC920853F7500C77588 /* DeviceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,12 +510,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -463,7 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -483,12 +565,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -509,7 +593,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -522,10 +606,12 @@
 			baseConfigurationReference = 939B9697D5DB4EFD6D3147B9 /* Pods-ThinCloud_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ThinCloud_Example.entitlements;
+				DEVELOPMENT_TEAM = 34LW86BQZ4;
 				INFOPLIST_FILE = ThinCloud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.yonomi.thincloud.ThinCloud-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -537,10 +623,12 @@
 			baseConfigurationReference = FE07B7A4D42606FFCC7DDBA4 /* Pods-ThinCloud_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ThinCloud_Example.entitlements;
+				DEVELOPMENT_TEAM = 34LW86BQZ4;
 				INFOPLIST_FILE = ThinCloud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.yonomi.thincloud.ThinCloud-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

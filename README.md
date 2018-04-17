@@ -1,9 +1,4 @@
-# ThinCloud
-
-[![CI Status](http://img.shields.io/travis/pattersongerald/ThinCloud.svg?style=flat)](https://travis-ci.org/pattersongerald/ThinCloud)
-[![Version](https://img.shields.io/cocoapods/v/ThinCloud.svg?style=flat)](http://cocoapods.org/pods/ThinCloud)
-[![License](https://img.shields.io/cocoapods/l/ThinCloud.svg?style=flat)](http://cocoapods.org/pods/ThinCloud)
-[![Platform](https://img.shields.io/cocoapods/p/ThinCloud.svg?style=flat)](http://cocoapods.org/pods/ThinCloud)
+# ThinCloud iOS SDK
 
 ## Example
 
@@ -11,19 +6,23 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+- iOS 11.0+
+- Xcode 9.3+
+- Swift 4.1+
+
 ## Installation
 
 ThinCloud is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ThinCloud'
+pod 'ThinCloud', :git => 'https://github.com/Yonomi/thincloud-sdk-ios.git', :tag => '0.1.0'
 ```
 
 ## Author
 
-pattersongerald, gerald@gerald.im
+Alex Patterson, alex@yonomi.co
 
 ## License
 
-ThinCloud is available under the MIT license. See the LICENSE file for more info.
+Copyright (c) 2018 Yonomi, Inc. All rights reserved.

@@ -1,6 +1,9 @@
 use_frameworks!
 
 target 'ThinCloud_Example' do
+  platform :ios, '11.0'
+
+  pod 'SwiftLint'
   pod 'ThinCloud', :path => '../'
 
   target 'ThinCloud_Tests' do
