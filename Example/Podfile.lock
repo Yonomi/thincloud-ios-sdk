@@ -1,10 +1,10 @@
 PODS:
-  - Alamofire (4.7.1)
+  - Alamofire (4.7.2)
   - Nimble (7.0.3)
   - Quick (1.2.0)
-  - SwiftLint (0.25.0)
+  - SwiftLint (0.25.1)
   - ThinCloud (0.1.0):
-    - Alamofire (~> 4.7.1)
+    - Alamofire (~> 4.7.2)
 
 DEPENDENCIES:
   - Nimble (~> 7.0.2)
@@ -12,17 +12,24 @@ DEPENDENCIES:
   - SwiftLint
   - ThinCloud (from `../`)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Nimble
+    - Quick
+    - SwiftLint
+
 EXTERNAL SOURCES:
   ThinCloud:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
-  ThinCloud: fcee631e58e3d4b01610a14cf84c86d6c6dba54e
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+  ThinCloud: 8824e1c60a81c2bd1d0e7a0f677e40225741b6ed
 
 PODFILE CHECKSUM: b3d9b5ae1475d71668a82ad4a14dc198c52be2e7
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

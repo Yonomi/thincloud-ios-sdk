@@ -9,13 +9,13 @@ struct UserRequest: Codable {
 }
 
 public struct UserResponse: Codable {
-    let email: String
-    let name: String
-    let active: Bool?
+    public let email: String
+    public let fullName: String
+    public let active: Bool?
     // let custom: [String: Any]? TODO: Codable
-    let userId: String?
-    let createdAt: Date?
-    let updatedAt: Date?
+    public let userId: String
+    public let createdAt: Date?
+    public let updatedAt: Date?
 }
 
 public typealias User = UserResponse

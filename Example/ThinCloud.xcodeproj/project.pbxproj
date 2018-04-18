@@ -217,7 +217,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				7BC4735701048F2D2FA40E5A /* [CP] Embed Pods Frameworks */,
-				BA822C662B90AE4FFAB50696 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -237,7 +236,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				83A88C277221A628A99B5CDB /* [CP] Embed Pods Frameworks */,
-				2B1FB6AA2B30793596319BF8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,21 +349,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		2B1FB6AA2B30793596319BF8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7BC4735701048F2D2FA40E5A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,21 +387,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA822C662B90AE4FFAB50696 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F740E2C9B553804828E1A830 /* [CP] Check Pods Manifest.lock */ = {

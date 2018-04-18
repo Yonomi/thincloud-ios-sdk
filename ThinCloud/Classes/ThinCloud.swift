@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 
 /// General container responsible for retaining the `ThinCloud` and `VirtualGateway` instances.
-public class ThinCloud {
+public class ThinCloud: OAuth2TokenDelegate {
     // MARK: - ThinCloud Singletons
 
     /// The ThinCloud SDK singleton.
@@ -18,40 +18,56 @@ public class ThinCloud {
     /// The ThinCloud deployment used.
     public private(set) var instance: String!
 
-    /// The ThinCloud 
+    /// The ThinCloud OAuth client key.
     var clientId: String!
+
+    /// The ThinCloud API key.
+    var apiKey: String!
 
     /// The user signed in to the ThinCloud instance. If nil, no user is signed in.
     public private(set) var currentUser = Persistence.cachedUser() {
-        didSet(newValue) {
-            Persistence.cacheUser(newValue)
+        didSet {
+            Persistence.cacheUser(currentUser)
         }
     }
 
     /// The client of the user associated with the current ThinCloud instance. If nil, no user is signed in.
     public private(set) var currentClient = Persistence.cachedClient() {
-        didSet(newValue) {
-            Persistence.cacheClient(newValue)
+        didSet {
+            Persistence.cacheClient(currentClient)
         }
+    }
+
+    /// OAuth2 access token persistence
+    func didUpdateAccessToken(_ accessToken: String) {
+        SecurePersistence.storeAccessToken(accessToken)
+    }
+
+    /// OAuth2 refresh token persistence
+    func didUpdateRefreshToken(_ refreshToken: String) {
+        SecurePersistence.storeRefreshToken(refreshToken)
     }
 
     /**
      Configures the ThinCloud singleton with your deployment and client keys.
 
      - parameters:
-        - instance: The instance name
-        - clientId: The client key
+        - instance: The ThinCloud instance name, i.e. api.<instance>.yonomi.cloud
+        - clientId: The OAuth client key.
+        - apiKey: The ThinCloud API key.
 
      */
-    public func configure(instance: String, clientId: String) {
+    public func configure(instance: String, clientId: String, apiKey: String) {
         self.clientId = clientId
+        self.apiKey = apiKey
         self.instance = instance
 
-        if currentClient != nil && currentUser != nil {
+        if currentClient != nil && currentUser != nil, let accessToken = SecurePersistence.accessToken(), let refreshToken = SecurePersistence.refreshToken() {
             // "resume" session
+            let oauthHandler = OAuth2Handler(clientID: clientId, baseURLString: "", accessToken: accessToken, refreshToken: refreshToken, delegate: self)
+            sessionManager.adapter = oauthHandler
+            sessionManager.retrier = oauthHandler
         }
-
-        // we're fresh
     }
 
     // MARK: - Client Registration
@@ -92,9 +108,8 @@ public class ThinCloud {
 
      */
     public func signIn(email: String, password: String, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
-        // get initial session token
-
-        sessionManager.request(APIRouter.getUser(userId: "")).validate().response { response in
+        let oauthRequest = OAuth2Request(grantType: .password, clientId: clientId, username: email, password: password)
+        sessionManager.request(APIRouter.createAuthToken(oauthRequest)).validate().response { response in
             if let error = response.error {
                 return completion(error, nil)
             }
@@ -104,11 +119,35 @@ public class ThinCloud {
             }
 
             let decoder = JSONDecoder()
-            let decodedUser = try! decoder.decode(User.self, from: data)
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-            self.currentUser = decodedUser
+            let oauthResponse = try! decoder.decode(OAuth2Response.self, from: data)
 
-            completion(nil, decodedUser)
+            SecurePersistence.storeAccessToken(oauthResponse.accessToken)
+            SecurePersistence.storeRefreshToken(oauthResponse.refreshToken)
+
+            let oauthHandler = OAuth2Handler(clientID: self.clientId, baseURLString: "", accessToken: oauthResponse.accessToken, refreshToken: oauthResponse.refreshToken, delegate: self)
+            self.sessionManager.adapter = oauthHandler
+            self.sessionManager.retrier = oauthHandler
+
+            // begin using session manager
+            self.sessionManager.request(APIRouter.getUser(userId: "@me")).validate().response { response in
+                if let error = response.error {
+                    return completion(error, nil)
+                }
+
+                guard let data = response.data else {
+                    return completion(nil, nil) // need a descriptive error here
+                }
+
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                let decodedUser = try! decoder.decode(User.self, from: data)
+
+                self.currentUser = decodedUser
+
+                completion(nil, decodedUser)
+            }
         }
     }
 
@@ -117,6 +156,7 @@ public class ThinCloud {
         // TODO: Do we need to destroy the associated client entity when signing out?
         currentUser = nil
         currentClient = nil
+        SecurePersistence.clear()
     }
 
     /**
@@ -145,11 +185,11 @@ public class ThinCloud {
         - completion: The handler called after a user fetch attempt is completed.
      */
     public func getUser(completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
-        guard let currentUser = currentUser else {
-            return completion(nil, nil) // need a descriptive error here
-        }
+//        guard let currentUser = currentUser else {
+//            return completion(nil, nil) // need a descriptive error here
+//        }
 
-        sessionManager.request(APIRouter.getUser(userId: currentUser.userId!)).validate().responseData { response in
+        sessionManager.request(APIRouter.getUser(userId: "@me")).validate().responseData { response in
             if let error = response.error {
                 return completion(error, nil)
             }
@@ -176,7 +216,7 @@ public class ThinCloud {
             return completion(nil) // need a descriptive error here
         }
 
-        sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId!)).validate().response { response in
+        sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId)).validate().response { response in
             if let error = response.error {
                 return completion(error)
             }
@@ -196,22 +236,54 @@ class Persistence {
 
     // MARK: - Client Persistence
 
+    // TODO: Generics
+
     static func cacheClient(_ client: ClientRegistrationResponse?) {
-        UserDefaults.standard.set(client, forKey: clientCacheKey)
+        guard let client = client else {
+            return UserDefaults.standard.set(nil, forKey: userCacheKey)
+        }
+
+        let encoder = PropertyListEncoder()
+        let encodedClient = try! encoder.encode(client)
+
+        UserDefaults.standard.set(encodedClient, forKey: clientCacheKey)
     }
 
     static func cachedClient() -> ClientRegistrationResponse? {
-        return UserDefaults.standard.object(forKey: clientCacheKey) as? ClientRegistrationResponse
+        let decoder = PropertyListDecoder()
+
+        guard let encodedClient = UserDefaults.standard.data(forKey: clientCacheKey) else {
+            return nil
+        }
+
+        let decodedClient = try! decoder.decode(ClientRegistrationResponse.self, from: encodedClient)
+
+        return decodedClient
     }
 
     // MARK: - Signed In User Persistence
 
     static func cacheUser(_ user: UserResponse?) {
-        UserDefaults.standard.set(user, forKey: userCacheKey)
+        guard let user = user else {
+            return UserDefaults.standard.set(nil, forKey: userCacheKey)
+        }
+
+        let encoder = PropertyListEncoder()
+        let encodedUser = try! encoder.encode(user)
+
+        UserDefaults.standard.set(encodedUser, forKey: userCacheKey)
     }
 
     static func cachedUser() -> UserResponse? {
-        return UserDefaults.standard.object(forKey: userCacheKey) as? UserResponse
+        let decoder = PropertyListDecoder()
+
+        guard let encodedUser = UserDefaults.standard.data(forKey: userCacheKey) else {
+            return nil
+        }
+
+        let decodedUser = try! decoder.decode(UserResponse.self, from: encodedUser)
+
+        return decodedUser
     }
 }
 
@@ -230,6 +302,11 @@ class SecurePersistence {
 
     static var refreshTokenKeychainKey: String {
         return "\(keychainPrefix).co.yonomi.thincloud.refresh-token"
+    }
+
+    static func clear() {
+        storeAccessToken(nil)
+        storeRefreshToken(nil)
     }
 
     // MARK: - Access Token Persistence (NOT CURRENTLY SECURE)

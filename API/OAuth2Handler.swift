@@ -1,6 +1,11 @@
 import Foundation
 import Alamofire
 
+protocol OAuth2TokenDelegate: class {
+    func didUpdateAccessToken(_ accessToken: String)
+    func didUpdateRefreshToken(_ refreshToken: String)
+}
+
 class OAuth2Handler: RequestAdapter, RequestRetrier {
     private typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?, _ refreshToken: String?) -> Void
 
@@ -11,30 +16,43 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
         return SessionManager(configuration: configuration)
     }()
 
+    private var delegate: OAuth2TokenDelegate?
+
     private let lock = NSLock()
 
     private var clientID: String
     private var baseURLString: String
-    private var accessToken: String
-    private var refreshToken: String
+    private var accessToken: String {
+        didSet {
+            delegate?.didUpdateAccessToken(accessToken)
+        }
+    }
+    private var refreshToken: String {
+        didSet {
+            delegate?.didUpdateRefreshToken(refreshToken)
+        }
+    }
 
     private var isRefreshing = false
     private var requestsToRetry: [RequestRetryCompletion] = []
 
     // MARK: - Initialization
 
-    public init(clientID: String, baseURLString: String, accessToken: String, refreshToken: String) {
+    public init(clientID: String, baseURLString: String, accessToken: String, refreshToken: String, delegate: OAuth2TokenDelegate) {
         self.clientID = clientID
         self.baseURLString = baseURLString
         self.accessToken = accessToken
         self.refreshToken = refreshToken
+        self.delegate = delegate
     }
 
     // MARK: - RequestAdapter
 
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
+
         urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+
         return urlRequest
     }
 
@@ -83,15 +101,16 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
         ]
 
         sessionManager.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseJSON { [weak self] response in
+            .response { [weak self] response in
                 guard let strongSelf = self else { return }
 
-                if
-                    let json = response.result.value as? [String: Any],
-                    let accessToken = json["access_token"] as? String,
-                    let refreshToken = json["refresh_token"] as? String
-                {
-                    completion(true, accessToken, refreshToken)
+                guard let data = response.data else { return completion(false, nil, nil) }
+
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                if let oauthResponse = try? jsonDecoder.decode(OAuth2Response.self, from: data) {
+                    completion(true, oauthResponse.accessToken, oauthResponse.refreshToken)
                 } else {
                     completion(false, nil, nil)
                 }

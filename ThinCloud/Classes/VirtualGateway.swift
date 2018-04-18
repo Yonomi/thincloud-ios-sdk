@@ -27,7 +27,7 @@ struct ThinCloudNotification {
 }
 
 
-public protocol VirtualGatewayDelegate {
+public protocol VirtualGatewayDelegate: class {
     /**
      Notifies the reciever of an incoming command.
 

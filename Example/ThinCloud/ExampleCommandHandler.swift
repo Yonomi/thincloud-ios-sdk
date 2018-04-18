@@ -13,6 +13,8 @@ class ExampleCommandHandler: VirtualGatewayDelegate {
         //}
     }
 
+    // OR
+
     func virtualGatewayDidReceiveCommand(_ commands: [DeviceCommand], completionHandler: (_ commandId: String, _ success: Bool) -> Void) {
         for command in commands {
             //Do Work {

@@ -7,6 +7,9 @@ enum APIRouter: URLRequestConvertible {
         return "https://api.\(ThinCloud.shared.instance!).yonomi.cloud/v1/"
     }
 
+    // Auth Token
+    case createAuthToken(OAuth2Request)
+
     // User
     case createUser(UserRequest)
     case getUser(userId: String)
@@ -34,7 +37,8 @@ enum APIRouter: URLRequestConvertible {
         switch self {
         case .createUser,
              .createClient,
-             .createDevice:
+             .createDevice,
+             .createAuthToken:
             return .post
         case .getClient,
              .getUser,
@@ -56,6 +60,8 @@ enum APIRouter: URLRequestConvertible {
 
     var path: String {
         switch self {
+        case .createAuthToken:
+            return "oauth/tokens"
         case .createUser:
             return "users"
         case .createClient:
@@ -94,6 +100,10 @@ enum APIRouter: URLRequestConvertible {
     var body: Data? {
         let encoder = JSONEncoder()
         switch self {
+        case let .createAuthToken(authRequest):
+            //let snakeCaseEncoder = JSONEncoder()
+            //snakeCaseEncoder.keyEncodingStrategy = .convertToSnakeCase
+            return try! encoder.encode(authRequest)
         case let .createUser(userRequest),
              let .updateUser(_, userRequest):
             return try! encoder.encode(userRequest)
@@ -114,7 +124,7 @@ enum APIRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         urlRequest.httpBody = body
 
-        urlRequest.setValue(ThinCloud.shared.clientId, forHTTPHeaderField: "x-api-key")
+        urlRequest.setValue(ThinCloud.shared.apiKey, forHTTPHeaderField: "x-api-key")
 
         if urlRequest.httpBody != nil {
             urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -161,7 +171,7 @@ enum AuthRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         urlRequest.httpBody = body
 
-        urlRequest.setValue(ThinCloud.shared.clientId, forHTTPHeaderField: "x-api-key")
+        urlRequest.setValue(ThinCloud.shared.apiKey, forHTTPHeaderField: "x-api-key")
 
         if urlRequest.httpBody != nil {
             urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
