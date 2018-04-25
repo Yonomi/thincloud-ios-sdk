@@ -9,6 +9,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
 
+    @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
 
     var user: User!
@@ -18,9 +19,23 @@ class UserViewController: UIViewController {
 
         user = ThinCloud.shared.currentUser
 
-        nameLabel.text = ""
-        emailLabel.text = ""
-        idLabel.text = ""
+        nameLabel.text = "Name: \(user.fullName)"
+        emailLabel.text = "E-mail: \(user.email)"
+        idLabel.text = "userId: \(user.userId)"
+    }
+
+    @IBAction func refreshButtonTouched(_ sender: UIButton) {
+        sender.isEnabled = false
+
+        ThinCloud.shared.getUser { (error, user) in
+            sender.isEnabled = true
+
+            if let error = error {
+                return self.presentError(title: "Error Refreshing User", description: error.localizedDescription)
+            }
+
+            self.user = user
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

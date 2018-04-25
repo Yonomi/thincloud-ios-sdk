@@ -1,12 +1,6 @@
 import UIKit
 import ThinCloud
 
-extension Device: CustomStringConvertible {
-    public var description: String {
-        return ""
-    }
-}
-
 class DeviceViewController: UIViewController {
 
     @IBOutlet weak var label: UILabel!
@@ -15,7 +9,15 @@ class DeviceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = device.description
+
+        title = device.physicalId
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
+        let json = try? encoder.encode(device)
+
+        label.text = String(data: json!, encoding: .utf8)!
     }
 
 }

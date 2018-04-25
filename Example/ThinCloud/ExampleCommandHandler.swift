@@ -1,27 +1,33 @@
 import Foundation
 import ThinCloud
+import UserNotifications
 
 /// Example implementation of a VirtualGatewayDelegate.
 class ExampleCommandHandler: VirtualGatewayDelegate {
 
     // MARK: - ThinCloud Virtual Gateway Command Handler
 
-    func virtualGatewayDidReceiveCommand(_ command: DeviceCommand, completionHandler: (Bool) -> Void) {
-        //Do Work {
-            // work is done
-            completionHandler(true)
-        //}
-    }
+    func virtualGatewayDidReceiveCommands(_ commands: [DeviceCommand], completionHandler: ([DeviceCommand]) -> Void) {
+        var updatedCommands = [DeviceCommand]()
 
-    // OR
-
-    func virtualGatewayDidReceiveCommand(_ commands: [DeviceCommand], completionHandler: (_ commandId: String, _ success: Bool) -> Void) {
         for command in commands {
-            //Do Work {
-            // work is done
-                completionHandler(command.commandId, true)
-            //}
-        }
-    }
+            // Our reference implementation will simply push a visible notification and report success.
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = "Incoming Virtual Gateway Command"
+            notificationContent.body = "Device ID: \(command.deviceId) → Command ID: \(command.commandId)"
+            notificationContent.sound = UNNotificationSound.default()
 
+            let notification = UNNotificationRequest(identifier: "\(command.deviceId)-\(command.commandId)", content: notificationContent, trigger: nil)
+
+            UNUserNotificationCenter.current().add(notification)
+
+            // We successfully handled the command 😄
+            var updatedCommand = command
+            updatedCommand.state = .completed
+
+            updatedCommands.append(updatedCommand)
+        }
+
+        completionHandler(updatedCommands)
+    }
 }

@@ -13,6 +13,15 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var environmentLabel: UILabel!
 
+    var isFormEnabled = true {
+        didSet {
+            nameTextField.isEnabled = isFormEnabled
+            emailTextField.isEnabled = isFormEnabled
+            passwordTextField.isEnabled = isFormEnabled
+            signUpButton.isEnabled = isFormEnabled
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,14 +40,19 @@ class SignUpViewController: UIViewController {
                 return
         }
 
+        isFormEnabled = false
+
         ThinCloud.shared.createUser(name: name, email: email, password: password) { error, _ in
             if let error = error {
+                self.isFormEnabled = true
                 return self.presentError(title: "Error Creating User", description: error.localizedDescription)
             }
 
             // SDK consumer is responsible for signing in after successfully creating a user
 
             ThinCloud.shared.signIn(email: email, password: password) { error, _ in
+                self.isFormEnabled = true
+
                 if let error = error {
                     return self.presentError(title: "Error Signing In", description: error.localizedDescription)
                 }

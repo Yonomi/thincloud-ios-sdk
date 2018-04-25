@@ -6,10 +6,31 @@ class DevicesTableViewController: UITableViewController {
     static let cellIdentifier = "deviceCellIdentifier"
     static let deviceDetailSegueIdentifier = "deviceDetailSegueIdentifier"
 
-    var devices = [Device]()
+    var devices = [Device]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        refreshControl?.beginRefreshing()
+        refreshControl?.sendActions(for: .valueChanged)
+    }
+
+    @IBAction func refreshControlValueChanged(_ sender: UIRefreshControl) {
+        ThinCloud.shared.getDevices { (error, devices) in
+            sender.endRefreshing()
+
+            if let error = error {
+                return self.presentError(title: "Error Loading Devices", description: error.localizedDescription)
+            }
+
+            if let devices = devices {
+                self.devices = devices
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -29,8 +50,8 @@ class DevicesTableViewController: UITableViewController {
 
         let device = devices[indexPath.row]
 
-        cell.textLabel?.text = device.description
-        cell.detailTextLabel?.text = device.description
+        cell.textLabel?.text = "\(device.physicalId) (\(device.devicetypeId))"
+        cell.detailTextLabel?.text = device.deviceId
 
         return cell
     }

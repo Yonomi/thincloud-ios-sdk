@@ -1,5 +1,7 @@
-import Foundation
+// Copyright (c) 2018 Yonomi, Inc. All rights reserved.
+
 import Alamofire
+import Foundation
 
 protocol OAuth2TokenDelegate: class {
     func didUpdateAccessToken(_ accessToken: String)
@@ -20,6 +22,7 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
 
     private let lock = NSLock()
 
+    private var username: String
     private var clientID: String
     private var baseURLString: String
     private var accessToken: String {
@@ -27,6 +30,7 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
             delegate?.didUpdateAccessToken(accessToken)
         }
     }
+
     private var refreshToken: String {
         didSet {
             delegate?.didUpdateRefreshToken(refreshToken)
@@ -38,11 +42,12 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
 
     // MARK: - Initialization
 
-    public init(clientID: String, baseURLString: String, accessToken: String, refreshToken: String, delegate: OAuth2TokenDelegate) {
+    public init(clientID: String, baseURLString: String, username: String, accessToken: String, refreshToken: String, delegate: OAuth2TokenDelegate) {
         self.clientID = clientID
         self.baseURLString = baseURLString
         self.accessToken = accessToken
         self.refreshToken = refreshToken
+        self.username = username
         self.delegate = delegate
     }
 
@@ -58,8 +63,8 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
 
     // MARK: - RequestRetrier
 
-    func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
-        lock.lock() ; defer { lock.unlock() }
+    func should(_: SessionManager, retry request: Request, with _: Error, completion: @escaping RequestRetryCompletion) {
+        lock.lock(); defer { lock.unlock() }
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             requestsToRetry.append(completion)
@@ -68,7 +73,7 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
                 refreshTokens { [weak self] succeeded, accessToken, refreshToken in
                     guard let strongSelf = self else { return }
 
-                    strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
+                    strongSelf.lock.lock(); defer { strongSelf.lock.unlock() }
 
                     if let accessToken = accessToken, let refreshToken = refreshToken {
                         strongSelf.accessToken = accessToken
@@ -91,13 +96,13 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
 
         isRefreshing = true
 
-        let urlString = "\(baseURLString)/oauth2/token"
+        let urlString = "\(baseURLString)oauth/tokens"
 
         let parameters = [
-            "access_token": accessToken,
-            "refresh_token": refreshToken,
-            "client_id": clientID,
-            "grant_type": "refresh_token"
+            "refreshToken": refreshToken,
+            "clientId": clientID,
+            "grant_type": "refresh_token",
+            "username": username,
         ]
 
         sessionManager.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default)
@@ -109,13 +114,13 @@ class OAuth2Handler: RequestAdapter, RequestRetrier {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
 
-                if let oauthResponse = try? jsonDecoder.decode(OAuth2Response.self, from: data) {
-                    completion(true, oauthResponse.accessToken, oauthResponse.refreshToken)
+                if let oauthResponse = try? jsonDecoder.decode(OAuth2RefreshResponse.self, from: data) {
+                    return completion(true, oauthResponse.accessToken, strongSelf.refreshToken)
                 } else {
                     completion(false, nil, nil)
                 }
 
                 strongSelf.isRefreshing = false
-        }
+            }
     }
 }

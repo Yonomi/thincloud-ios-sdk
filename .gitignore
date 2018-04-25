@@ -28,3 +28,9 @@ DerivedData
 Carthage/Build
 
 Pods/
+
+# Swift toolchain
+.build/
+
+# Jazzy
+docs/

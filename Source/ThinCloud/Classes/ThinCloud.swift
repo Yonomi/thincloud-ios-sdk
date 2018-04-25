@@ -1,8 +1,14 @@
+// Copyright (c) 2018 Yonomi, Inc. All rights reserved.
+
 import Alamofire
 import Foundation
+#if os(iOS) || os(tvOS)
+    import UIKit.UIApplication
+#endif
 
 /// General container responsible for retaining the `ThinCloud` and `VirtualGateway` instances.
 public class ThinCloud: OAuth2TokenDelegate {
+
     // MARK: - ThinCloud Singletons
 
     /// The ThinCloud SDK singleton.
@@ -52,7 +58,7 @@ public class ThinCloud: OAuth2TokenDelegate {
      Configures the ThinCloud singleton with your deployment and client keys.
 
      - parameters:
-        - instance: The ThinCloud instance name, i.e. api.<instance>.yonomi.cloud
+        - instance: The ThinCloud instance name, i.e. api.instance.yonomi.cloud
         - clientId: The OAuth client key.
         - apiKey: The ThinCloud API key.
 
@@ -62,39 +68,60 @@ public class ThinCloud: OAuth2TokenDelegate {
         self.apiKey = apiKey
         self.instance = instance
 
-        if currentClient != nil && currentUser != nil, let accessToken = SecurePersistence.accessToken(), let refreshToken = SecurePersistence.refreshToken() {
-            // "resume" session
-            let oauthHandler = OAuth2Handler(clientID: clientId, baseURLString: "", accessToken: accessToken, refreshToken: refreshToken, delegate: self)
+        // Resume session if possible
+        if let currentUser = currentUser, let accessToken = SecurePersistence.accessToken(), let refreshToken = SecurePersistence.refreshToken() {
+            let oauthHandler = OAuth2Handler(clientID: clientId, baseURLString: "https://api.\(ThinCloud.shared.instance!).yonomi.cloud/v1/", username: currentUser.email, accessToken: accessToken, refreshToken: refreshToken, delegate: self)
             sessionManager.adapter = oauthHandler
             sessionManager.retrier = oauthHandler
+
+            #if os(iOS) || os(tvOS)
+                registerClient()
+            #endif
         }
     }
 
     // MARK: - Client Registration
 
-    /// A convenience method for UIApplication.shared.registerForRemoteNotifications().
-    public func registerClient() {
-        UIApplication.shared.registerForRemoteNotifications() // Flows back to us through AppDelegate hook
-    }
-
-    func registerClient(deviceToken: String) {
-        let bundleDictionary = Bundle.main.infoDictionary!
-
-        let appName = bundleDictionary[kCFBundleIdentifierKey as String] as! String
-        let appVersion = bundleDictionary["CFBundleShortVersionString"] as! String
-
-        let currentDevice = UIDevice.current
-
-        let deviceModel = currentDevice.model
-        let deviceVersion = currentDevice.systemVersion
-        let installId = currentDevice.identifierForVendor!.uuidString
-
-        let clientRequest = ClientRegistrationRequest(applicationName: appName, applicationVersion: appVersion, deviceModel: deviceModel, devicePlatform: "ios", deviceVersion: deviceVersion, deviceToken: deviceToken, installId: installId, metadata: nil, clientId: nil, userId: nil)
-
-        sessionManager.request(APIRouter.createClient(clientRequest)).validate().response { response in
-
+    #if os(iOS) || os(tvOS)
+        /// A convenience method for UIApplication.shared.registerForRemoteNotifications().
+        public func registerClient() {
+            UIApplication.shared.registerForRemoteNotifications() // Flows back to us through the AppDelegate hook
         }
-    }
+
+        func registerClient(deviceToken: String, completion: @escaping (_ error: Error?, _ client: Client?) -> Void) {
+            let bundleDictionary = Bundle.main.infoDictionary!
+
+            let appName = bundleDictionary[kCFBundleIdentifierKey as String] as! String
+            let appVersion = bundleDictionary["CFBundleShortVersionString"] as! String
+
+            let currentDevice = UIDevice.current
+
+            let deviceModel = currentDevice.model
+            let deviceVersion = currentDevice.systemVersion
+            let installId = currentDevice.identifierForVendor!.uuidString
+
+            let clientRequest = ClientRegistrationRequest(applicationName: appName, applicationVersion: appVersion, deviceModel: deviceModel, devicePlatform: "ios", deviceVersion: deviceVersion, deviceToken: deviceToken, installId: installId, metadata: nil, clientId: nil, userId: nil)
+
+            sessionManager.request(APIRouter.createClient(clientRequest)).validate().response { response in
+                if let error = response.error {
+                    return completion(error, nil)
+                }
+
+                guard let data = response.data else {
+                    return completion(nil, nil) // need a descriptive error here
+                }
+
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+
+                let client = try! decoder.decode(Client.self, from: data)
+
+                self.currentClient = client
+
+                return completion(nil, client)
+            }
+        }
+    #endif
 
     // MARK: - User State Management
 
@@ -126,27 +153,22 @@ public class ThinCloud: OAuth2TokenDelegate {
             SecurePersistence.storeAccessToken(oauthResponse.accessToken)
             SecurePersistence.storeRefreshToken(oauthResponse.refreshToken)
 
-            let oauthHandler = OAuth2Handler(clientID: self.clientId, baseURLString: "", accessToken: oauthResponse.accessToken, refreshToken: oauthResponse.refreshToken, delegate: self)
+            let oauthHandler = OAuth2Handler(clientID: self.clientId, baseURLString: "https://api.\(ThinCloud.shared.instance!).yonomi.cloud/v1/", username: email, accessToken: oauthResponse.accessToken, refreshToken: oauthResponse.refreshToken, delegate: self)
             self.sessionManager.adapter = oauthHandler
             self.sessionManager.retrier = oauthHandler
 
             // begin using session manager
-            self.sessionManager.request(APIRouter.getUser(userId: "@me")).validate().response { response in
-                if let error = response.error {
+
+            self.getUser { error, user in
+                if let error = error {
                     return completion(error, nil)
                 }
 
-                guard let data = response.data else {
-                    return completion(nil, nil) // need a descriptive error here
+                if let user = user {
+                    return completion(nil, user)
                 }
 
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-                let decodedUser = try! decoder.decode(User.self, from: data)
-
-                self.currentUser = decodedUser
-
-                completion(nil, decodedUser)
+                return completion(nil, nil) // need a descriptive error here
             }
         }
     }
@@ -159,13 +181,17 @@ public class ThinCloud: OAuth2TokenDelegate {
         SecurePersistence.clear()
     }
 
+    // MARK: - User CRUD
+
     /**
-     Creates a user
+     Creates a user.
 
      - parameters:
         - name: The user's name.
+        - email: The user's e-mail.
         - password: The user's password.
         - completion: The handler called after a user creation attempt is completed.
+
     */
     public func createUser(name: String, email: String, password: String, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
         let user = UserRequest(email: email, name: name, password: password, custom: nil, userId: nil)
@@ -179,16 +205,13 @@ public class ThinCloud: OAuth2TokenDelegate {
     }
 
     /**
-     Fetches the user associated with the ThinCloud instance
+     Fetches the signed in user associated with the ThinCloud SDK instance.
 
      - parameters:
         - completion: The handler called after a user fetch attempt is completed.
+
      */
     public func getUser(completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
-//        guard let currentUser = currentUser else {
-//            return completion(nil, nil) // need a descriptive error here
-//        }
-
         sessionManager.request(APIRouter.getUser(userId: "@me")).validate().responseData { response in
             if let error = response.error {
                 return completion(error, nil)
@@ -199,6 +222,7 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
             let decodedUser = try! decoder.decode(User.self, from: data)
 
             self.currentUser = decodedUser
@@ -206,11 +230,24 @@ public class ThinCloud: OAuth2TokenDelegate {
         }
     }
 
-    public func updateUser(completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
+    /**
+     Updates a user.
 
+     - parameters:
+        - user: The user to update.
+        - completion: The handler called after a user update attempt is completed.
+
+     */
+    public func updateUser(_ user: User, completion _: @escaping (_ error: Error?, _ user: User?) -> Void) {
     }
 
-    // TODO: Do we need to support this in the SDK?
+    /**
+     Deletes the current user associated with the ThinCloud SDK instance.
+
+     - parameters:
+        - completion: The handler called after a user delete attempt is completed.
+
+     */
     public func deleteUser(completion: @escaping (_ error: Error?) -> Void) {
         guard let currentUser = currentUser else {
             return completion(nil) // need a descriptive error here
@@ -221,112 +258,63 @@ public class ThinCloud: OAuth2TokenDelegate {
                 return completion(error)
             }
 
+            self.signOut()
+
             completion(nil)
         }
     }
 
     // MARK: - Device CRUD
 
-}
+    /**
+     Fetches all devices associated with the current user.
 
-class Persistence {
+     - parameters:
+        - completion: The handler called after a device fetch attempt is completed.
 
-    static let clientCacheKey = "thincloud-cached-client"
-    static let userCacheKey = "thincloud-cached-user"
+     */
+    public func getDevices(completion: @escaping (_ error: Error?, _ device: [Device]?) -> Void) {
+        sessionManager.request(APIRouter.getDevices()).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
 
-    // MARK: - Client Persistence
+            guard let data = response.data else {
+                return completion(nil, nil) // need a descriptive error here
+            }
 
-    // TODO: Generics
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            let decodedDevices = try! decoder.decode([Device].self, from: data)
 
-    static func cacheClient(_ client: ClientRegistrationResponse?) {
-        guard let client = client else {
-            return UserDefaults.standard.set(nil, forKey: userCacheKey)
+            completion(nil, decodedDevices)
         }
-
-        let encoder = PropertyListEncoder()
-        let encodedClient = try! encoder.encode(client)
-
-        UserDefaults.standard.set(encodedClient, forKey: clientCacheKey)
     }
 
-    static func cachedClient() -> ClientRegistrationResponse? {
-        let decoder = PropertyListDecoder()
+    // MARK: - Clients CRUD
 
-        guard let encodedClient = UserDefaults.standard.data(forKey: clientCacheKey) else {
-            return nil
+    /**
+     Fetches all clients associated with the current user.
+
+     - parameters:
+        - completion: The handler called after a client fetch attempt is completed.
+
+     */
+    public func getClients(completion: @escaping (_ error: Error?, _ clients: [Client]?) -> Void) {
+        sessionManager.request(APIRouter.getClients()).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(nil, nil)
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            let decodedClients = try! decoder.decode([Client].self, from: data)
+
+            completion(nil, decodedClients)
         }
-
-        let decodedClient = try! decoder.decode(ClientRegistrationResponse.self, from: encodedClient)
-
-        return decodedClient
     }
-
-    // MARK: - Signed In User Persistence
-
-    static func cacheUser(_ user: UserResponse?) {
-        guard let user = user else {
-            return UserDefaults.standard.set(nil, forKey: userCacheKey)
-        }
-
-        let encoder = PropertyListEncoder()
-        let encodedUser = try! encoder.encode(user)
-
-        UserDefaults.standard.set(encodedUser, forKey: userCacheKey)
-    }
-
-    static func cachedUser() -> UserResponse? {
-        let decoder = PropertyListDecoder()
-
-        guard let encodedUser = UserDefaults.standard.data(forKey: userCacheKey) else {
-            return nil
-        }
-
-        let decodedUser = try! decoder.decode(UserResponse.self, from: encodedUser)
-
-        return decodedUser
-    }
-}
-
-class SecurePersistence {
-
-    static var keychainPrefix: String {
-        let bundleDictionary = Bundle.main.infoDictionary!
-        let appName = bundleDictionary[kCFBundleIdentifierKey as String] as! String
-
-        return appName
-    }
-
-    static var accessTokenKeychainKey: String {
-        return "\(keychainPrefix).co.yonomi.thincloud.oauth-token"
-    }
-
-    static var refreshTokenKeychainKey: String {
-        return "\(keychainPrefix).co.yonomi.thincloud.refresh-token"
-    }
-
-    static func clear() {
-        storeAccessToken(nil)
-        storeRefreshToken(nil)
-    }
-
-    // MARK: - Access Token Persistence (NOT CURRENTLY SECURE)
-
-    static func storeAccessToken(_ token: String?) {
-        UserDefaults.standard.set(token, forKey: accessTokenKeychainKey)
-    }
-
-    static func accessToken() -> String? {
-        return UserDefaults.standard.string(forKey: accessTokenKeychainKey)
-    }
-
-    // MARK: - Refresh Token Persistence (NOT CURRENTLY SECURE)
-
-    static func storeRefreshToken(_ token: String?) {
-        UserDefaults.standard.set(token, forKey: refreshTokenKeychainKey)
-    }
-
-    static func refreshToken() -> String? {
-        return UserDefaults.standard.string(forKey: refreshTokenKeychainKey)
-    }
-
 }

@@ -1,12 +1,6 @@
 import UIKit
 import ThinCloud
 
-extension Client: CustomStringConvertible {
-    public var description: String {
-        return "Client Description"
-    }
-}
-
 class ClientViewController: UIViewController {
 
     @IBOutlet weak var label: UILabel!
@@ -15,6 +9,12 @@ class ClientViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = client.description
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
+        let json = try? encoder.encode(client)
+
+        label.text = String(data: json!, encoding: .utf8)!
     }
 }

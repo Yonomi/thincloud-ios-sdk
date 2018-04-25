@@ -12,6 +12,14 @@ class SignInViewController: UIViewController {
 
     @IBOutlet weak var environmentLabel: UILabel!
 
+    var isFormEnabled = true {
+        didSet {
+            emailTextField.isEnabled = isFormEnabled
+            passwordTextField.isEnabled = isFormEnabled
+            signInButton.isEnabled = isFormEnabled
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,12 +33,12 @@ class SignInViewController: UIViewController {
                 return
         }
 
-        sender.isEnabled = false
+        isFormEnabled = false
 
         // SDK consumer is responsible for passing in an initial e-mail and password
 
         ThinCloud.shared.signIn(email: email, password: password) { (error, _) in
-            sender.isEnabled = true
+            self.isFormEnabled = true
 
             if let error = error {
                 return self.presentError(title: "Error Signing In", description: error.localizedDescription)

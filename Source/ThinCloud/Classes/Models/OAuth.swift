@@ -1,3 +1,5 @@
+// Copyright (c) 2018 Yonomi, Inc. All rights reserved.
+
 import Foundation
 
 struct OAuth2Request: Codable {
@@ -5,7 +7,7 @@ struct OAuth2Request: Codable {
         case password
         case refreshToken = "refresh_token"
     }
-    
+
     let grantType: GrantType
     let clientId: String
     let username: String
@@ -17,6 +19,14 @@ struct OAuth2Request: Codable {
         case username
         case password
     }
+}
+
+struct OAuth2Response: Codable {
+    let accessToken: String
+    let refreshToken: String
+    let idToken: String
+    let tokenType: String
+    let expiresIn: Int
 }
 
 struct OAuth2RefreshRequest: Codable {
@@ -33,9 +43,8 @@ struct OAuth2RefreshRequest: Codable {
     }
 }
 
-struct OAuth2Response: Codable {
+struct OAuth2RefreshResponse: Codable {
     let accessToken: String
-    let refreshToken: String
     let idToken: String
     let tokenType: String
     let expiresIn: Int

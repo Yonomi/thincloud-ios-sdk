@@ -1,3 +1,5 @@
+// Copyright (c) 2018 Yonomi, Inc. All rights reserved.
+
 import Foundation
 
 extension DateFormatter {

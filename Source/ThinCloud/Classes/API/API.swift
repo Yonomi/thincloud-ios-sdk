@@ -1,6 +1,7 @@
+// Copyright (c) 2018 Yonomi, Inc. All rights reserved.
+
 import Alamofire
 import Foundation
-
 
 enum APIRouter: URLRequestConvertible {
     var baseUrl: String {
@@ -17,21 +18,23 @@ enum APIRouter: URLRequestConvertible {
     case deleteUser(userId: String)
 
     // Client
+    case getClients()
     case createClient(ClientRegistrationRequest)
     case updateClient(clientId: String, ClientRegistrationRequest)
     case getClient(clientId: String)
     case deleteClient(clientId: String)
 
     // Device
+    case getDevices()
     case createDevice(DeviceRequest)
     case getDevice(deviceId: String)
     case updateDevice(deviceId: String, DeviceRequest)
     case deleteDevice(deviceId: String)
 
     // Device Commands
-    case getDeviceCommands(deviceId: String, state: DeviceCommandsResponse.State)
+    case getDeviceCommands(deviceId: String, state: DeviceCommandResponse.State)
     case updateDeviceCommands(deviceId: String, commandId: String)
-    case updateDeviceCommandsState(deviceId: String, commandId: String, state: DeviceCommandsResponse.State)
+    case updateDeviceCommandsState(deviceId: String, commandId: String, state: DeviceCommandResponse.State)
 
     var method: HTTPMethod {
         switch self {
@@ -41,8 +44,10 @@ enum APIRouter: URLRequestConvertible {
              .createAuthToken:
             return .post
         case .getClient,
+             .getClients,
              .getUser,
              .getDevice,
+             .getDevices,
              .getDeviceCommands:
             return .get
         case .updateUser,
@@ -64,7 +69,8 @@ enum APIRouter: URLRequestConvertible {
             return "oauth/tokens"
         case .createUser:
             return "users"
-        case .createClient:
+        case .createClient,
+             .getClients:
             return "clients"
         case .createDevice:
             return "devices"
@@ -76,6 +82,8 @@ enum APIRouter: URLRequestConvertible {
              let .updateUser(userId, _),
              let .deleteUser(userId):
             return "users/\(userId)"
+        case .getDevices:
+            return "devices"
         case let .getDevice(deviceId),
              let .updateDevice(deviceId, _),
              let .deleteDevice(deviceId):
@@ -90,7 +98,7 @@ enum APIRouter: URLRequestConvertible {
 
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getDeviceCommands(_, let state):
+        case let .getDeviceCommands(_, state):
             return [URLQueryItem(name: "state", value: state.rawValue)]
         default:
             return nil
@@ -101,14 +109,16 @@ enum APIRouter: URLRequestConvertible {
         let encoder = JSONEncoder()
         switch self {
         case let .createAuthToken(authRequest):
-            //let snakeCaseEncoder = JSONEncoder()
-            //snakeCaseEncoder.keyEncodingStrategy = .convertToSnakeCase
+            // let snakeCaseEncoder = JSONEncoder()
+            // snakeCaseEncoder.keyEncodingStrategy = .convertToSnakeCase
             return try! encoder.encode(authRequest)
         case let .createUser(userRequest),
              let .updateUser(_, userRequest):
             return try! encoder.encode(userRequest)
         case let .updateDeviceCommandsState(_, _, state):
             return try! encoder.encode(["state": state])
+        case let .createClient(clientRequest):
+            return try! encoder.encode(clientRequest)
         default:
             return nil
         }

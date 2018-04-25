@@ -6,10 +6,31 @@ class ClientsTableViewController: UITableViewController {
     static let cellIdentifier = "clientCellIdentifier"
     static let clientDetailSegueIdentifier = "clientDetailSegueIdentifier"
 
-    var clients = [Client]()
+    var clients = [Client]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        refreshControl?.beginRefreshing()
+        refreshControl?.sendActions(for: .valueChanged)
+    }
+
+    @IBAction func refreshControlValueChanged(_ sender: UIRefreshControl) {
+        ThinCloud.shared.getClients { (error, clients) in
+            sender.endRefreshing()
+
+            if let error = error {
+                return self.presentError(title: "Error Loading Clients", description: error.localizedDescription)
+            }
+
+            if let clients = clients {
+                self.clients = clients
+            }
+        }
     }
 
     // MARK: - Table view data source
