@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.version          = '0.1.0'
   s.summary          = 'The Yonomi ThinCloud SDK for iOS.'
   s.homepage         = 'https://github.com/Yonomi/thincloud-ios-sdk'
-  s.license          = { :file => 'LICENSE' }
+  s.license          = { :type => 'Copyright', :file => 'LICENSE' }
   s.authors          = { 'Yonomi' => 'developer@yonomi.co' }
   s.source           = { :git => 'https://github.com/Yonomi/thincloud-ios-sdk.git', :tag => s.version.to_s }
 
