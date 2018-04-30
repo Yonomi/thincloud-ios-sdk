@@ -108,13 +108,15 @@ public class ThinCloud: OAuth2TokenDelegate {
                 }
 
                 guard let data = response.data else {
-                    return completion(nil, nil) // need a descriptive error here
+                    return completion(ThinCloudError.responseError, nil)
                 }
 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(.iso8601Full)
 
-                let client = try! decoder.decode(Client.self, from: data)
+                guard let client = try? decoder.decode(Client.self, from: data) else {
+                    return completion(ThinCloudError.deserializationError, nil)
+                }
 
                 self.currentClient = client
 
@@ -142,13 +144,15 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             guard let data = response.data else {
-                return completion(nil, nil) // need a descriptive error here
+                return completion(ThinCloudError.responseError, nil)
             }
 
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-            let oauthResponse = try! decoder.decode(OAuth2Response.self, from: data)
+            guard let oauthResponse = try? decoder.decode(OAuth2Response.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
 
             SecurePersistence.storeAccessToken(oauthResponse.accessToken)
             SecurePersistence.storeRefreshToken(oauthResponse.refreshToken)
@@ -168,7 +172,7 @@ public class ThinCloud: OAuth2TokenDelegate {
                     return completion(nil, user)
                 }
 
-                return completion(nil, nil) // need a descriptive error here
+                return completion(ThinCloudError.responseError, nil)
             }
         }
     }
@@ -218,12 +222,14 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             guard let data = response.data else {
-                return completion(nil, nil) // need a descriptive error here
+                return completion(ThinCloudError.responseError, nil)
             }
 
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-            let decodedUser = try! decoder.decode(User.self, from: data)
+            guard let decodedUser = try? decoder.decode(User.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
 
             self.currentUser = decodedUser
             completion(nil, decodedUser)
@@ -250,7 +256,7 @@ public class ThinCloud: OAuth2TokenDelegate {
      */
     public func deleteUser(completion: @escaping (_ error: Error?) -> Void) {
         guard let currentUser = currentUser else {
-            return completion(nil) // need a descriptive error here
+            return completion(ThinCloudError.notAuthenticated) // need a descriptive error here
         }
 
         sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId)).validate().response { response in
@@ -280,12 +286,14 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             guard let data = response.data else {
-                return completion(nil, nil) // need a descriptive error here
+                return completion(ThinCloudError.responseError, nil)
             }
 
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-            let decodedDevices = try! decoder.decode([Device].self, from: data)
+            guard let decodedDevices = try? decoder.decode([Device].self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
 
             completion(nil, decodedDevices)
         }
@@ -312,7 +320,9 @@ public class ThinCloud: OAuth2TokenDelegate {
 
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-            let decodedClients = try! decoder.decode([Client].self, from: data)
+            guard let decodedClients = try? decoder.decode([Client].self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
 
             completion(nil, decodedClients)
         }

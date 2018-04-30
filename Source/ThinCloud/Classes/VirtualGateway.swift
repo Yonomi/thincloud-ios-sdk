@@ -60,7 +60,9 @@ public class VirtualGateway {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(.iso8601Full)
 
-            let updatedCommand = try! decoder.decode(DeviceCommandResponse.self, from: data)
+            guard let updatedCommand = try? decoder.decode(DeviceCommandResponse.self, from: data) else {
+                return completionHandler(ThinCloudError.deserializationError, nil)
+            }
 
             completionHandler(nil, updatedCommand)
         }
@@ -115,7 +117,9 @@ public class VirtualGateway {
 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                let pendingDeviceCommands = try! decoder.decode([DeviceCommandResponse].self, from: data)
+                guard let pendingDeviceCommands = try? decoder.decode([DeviceCommandResponse].self, from: data) else {
+                    return completionHandler(.failed)
+                }
 
                 let ackDispatchGroup = DispatchGroup()
 

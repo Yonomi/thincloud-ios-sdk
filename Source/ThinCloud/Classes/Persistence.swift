@@ -26,7 +26,7 @@ class Persistence {
             return nil
         }
 
-        let decoded = try! decoder.decode(T.self, from: encoded)
+        let decoded = try? decoder.decode(T.self, from: encoded)
 
         return decoded
     }
