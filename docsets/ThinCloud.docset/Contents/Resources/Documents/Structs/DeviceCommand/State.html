@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>State Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/State" class="dashAnchor"></a>
+    <a title="State Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">ThinCloud Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">ThinCloud Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        State Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/ThinCloud.html">ThinCloud</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/VirtualGateway.html">VirtualGateway</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Protocols/VirtualGatewayDelegate.html">VirtualGatewayDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/Client.html">Client</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Device.html">Device</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DeviceCommand.html">DeviceCommand</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DeviceCommand/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Location.html">Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/User.html">User</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>State</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">State</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Codable</span></code></pre>
+
+                </div>
+              </div>
+            <p>The state of a <code><a href="../../Structs/DeviceCommand.html">DeviceCommand</a></code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO7pendingA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/pending" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO7pendingA2EmF">pending</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command is pending.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">pending</span> <span class="o">=</span> <span class="s">"PENDING"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO6queuedA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/queued" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO6queuedA2EmF">queued</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command is queued.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">queued</span> <span class="o">=</span> <span class="s">"QUEUED"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO3ackA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/ack" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO3ackA2EmF">ack</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command has been acknowledged.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">ack</span> <span class="o">=</span> <span class="s">"ACK"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO9completedA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/completed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO9completedA2EmF">completed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command was completed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">completed</span> <span class="o">=</span> <span class="s">"COMPLETED"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO4nackA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/nack" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO4nackA2EmF">nack</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command was not acknowledged</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">nack</span> <span class="o">=</span> <span class="s">"NACK"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO10successfulA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/successful" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO10successfulA2EmF">successful</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command completed successfully.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">successful</span> <span class="o">=</span> <span class="s">"SUCCESSFUL"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO6failedA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/failed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO6failedA2EmF">failed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command failed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">failed</span> <span class="o">=</span> <span class="s">"FAILED"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloud13DeviceCommandV5StateO7revokedA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/revoked" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud13DeviceCommandV5StateO7revokedA2EmF">revoked</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The command was revoked.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">revoked</span> <span class="o">=</span> <span class="s">"REVOKED"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/Yonomi/thincloud-ios-sdk" target="_blank" rel="external">Yonomi</a>. All rights reserved. (Last updated: 2018-04-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
