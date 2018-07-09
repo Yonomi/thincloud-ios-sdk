@@ -183,6 +183,11 @@ public class ThinCloud: OAuth2TokenDelegate {
         currentUser = nil
         currentClient = nil
         SecurePersistence.clear()
+        sessionManager.retrier = nil
+        sessionManager.adapter = nil
+        sessionManager.session.getAllTasks { tasks in
+            tasks.forEach({ $0.cancel() })
+        }
     }
 
     /**
