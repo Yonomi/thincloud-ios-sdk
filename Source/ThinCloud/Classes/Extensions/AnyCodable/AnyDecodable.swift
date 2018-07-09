@@ -29,6 +29,7 @@ import Foundation
      let dictionary = try! decoder.decode([String: AnyCodable].self, from: json)
  */
 public struct AnyDecodable: Decodable {
+    /// The type-erased underlying value.
     public let value: Any
     
     public init<T>(_ value: T?) {
@@ -113,6 +114,7 @@ extension AnyDecodable: Equatable {
 }
 
 extension AnyDecodable: CustomStringConvertible {
+    /// A string representation of the decodable object.
     public var description: String {
         switch value {
         case is Void:
@@ -126,6 +128,7 @@ extension AnyDecodable: CustomStringConvertible {
 }
 
 extension AnyDecodable: CustomDebugStringConvertible {
+    /// Returns a string that describes the contents of the receiver for presentation in the debugger.
     public var debugDescription: String {
         switch value {
         case let value as CustomDebugStringConvertible:

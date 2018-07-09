@@ -14,6 +14,7 @@ import Foundation
  - SeeAlso: `AnyDecodable`
  */
 public struct AnyCodable: Codable {
+    /// The type-erased underlying value.
     public let value: Any
     
     public init<T>(_ value: T?) {
@@ -67,6 +68,7 @@ extension AnyCodable: Equatable {
 }
 
 extension AnyCodable: CustomStringConvertible {
+    /// A string representation of the codable object.
     public var description: String {
         switch value {
         case is Void:
@@ -80,6 +82,7 @@ extension AnyCodable: CustomStringConvertible {
 }
 
 extension AnyCodable: CustomDebugStringConvertible {
+    /// Returns a string that describes the contents of the receiver for presentation in the debugger.
     public var debugDescription: String {
         switch value {
         case let value as CustomDebugStringConvertible:

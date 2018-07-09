@@ -27,6 +27,7 @@ import Foundation
      let json = try! encoder.encode(dictionary)
  */
 public struct AnyEncodable: Encodable {
+    /// The type-erased underlying value.
     public let value: Any
     
     public init<T>(_ value: T?) {
@@ -138,6 +139,7 @@ extension AnyEncodable: Equatable {
 }
 
 extension AnyEncodable: CustomStringConvertible {
+    /// A string representation of the encodable object.
     public var description: String {
         switch value {
         case is Void:
@@ -151,6 +153,7 @@ extension AnyEncodable: CustomStringConvertible {
 }
 
 extension AnyEncodable: CustomDebugStringConvertible {
+    /// Returns a string that describes the contents of the receiver for presentation in the debugger.
     public var debugDescription: String {
         switch value {
         case let value as CustomDebugStringConvertible:
