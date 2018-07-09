@@ -16,7 +16,7 @@ struct DeviceRequest: Codable {
     let devicetypeId: String
     let physicalId: String
     let location: Location?
-    let custom: [String: String]? // TODO: Does this need to support all JSON value types?
+    let custom: [String: AnyCodable]?
 }
 
 /// Representation of a device stored in ThinCloud.
@@ -32,7 +32,7 @@ public struct Device: Codable {
     /// The GeoJSON represenation of the device's location
     public let location: Location?
     /// Key-value pairs of customer specified metadata.
-    public let custom: [String: String]?
+    public let custom: [String: AnyCodable]?
     /// Commissioning state of the device.
     public let commissioning: Bool?
     /// Connectivity state of the device.
@@ -77,8 +77,11 @@ public struct DeviceCommand: Codable {
     public let name: String
     /// ThinCloud generated user identifier.
     public let userId: String
-//    public let request: [String: String]?
-//    public var response: [String: String]?
+    /// Key-value pairs of customer specified incoming request data.
+    public let request: [String: AnyCodable]?
+    /// Key-value pairs of customer specified outgoing response data.
+    /// Custom response information associated with the command.
+    public var response: [String: AnyCodable]?
     /// The state of the device command.
     public var state: State
     /// Date the command was created.

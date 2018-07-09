@@ -6,7 +6,7 @@ struct UserRequest: Codable {
     let email: String
     let name: String
     let password: String?
-    let custom: [String: String]? // TODO: Does this need to support all JSON value types?
+    let custom: [String: AnyCodable]?
     let userId: String?
 }
 
@@ -30,7 +30,7 @@ public struct User: Codable {
     /// The active state of the user.
     public let active: Bool?
     /// Key-value pairs of customer specified metadata.
-    public let custom: [String: String]?
+    public let custom: [String: AnyCodable]
     /// ThinCloud generated user identifier.
     public let userId: String
     /// Date the user was created.
