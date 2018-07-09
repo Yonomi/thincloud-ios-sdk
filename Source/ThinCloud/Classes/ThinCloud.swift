@@ -185,6 +185,85 @@ public class ThinCloud: OAuth2TokenDelegate {
         SecurePersistence.clear()
     }
 
+    /**
+     Begins the user password reset process.
+
+     - parameters:
+     - email: The user's e-mail address.
+     - completion: The handler called after a reset attempt is completed.
+
+     */
+    public func resetPassword(email: String, completion: @escaping (_ error: Error?) -> Void) {
+        let resetRequest = PasswordResetRequest(username: email, clientId: clientId)
+        sessionManager.request(APIRouter.resetPassword(resetRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Verifies a password change of a user.
+
+     - parameters:
+     - email: The user's e-mail address.
+     - password: The user's new password.
+     - confirmationCode: The confirmation code sent to the user's e-mail address.
+     - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func verifyResetPassword(email: String, password: String, confirmationCode: String, completion: @escaping (_ error: Error?) -> Void) {
+        let verifyRequest = VerifyPasswordResetRequest(username: email, password: password, confirmationCode: confirmationCode)
+        sessionManager.request(APIRouter.verifyResetPassword(verifyRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Verifies a new user.
+
+     - parameters:
+     - email: The user's e-mail address.
+     - confirmationCode: The confirmation code sent to the user's e-mail address.
+     - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func verifyUser(email: String, confirmationCode: String, completion: @escaping (_ error: Error?) -> Void) {
+        let confirmationRequest = UserConfirmationCodeRequest(email: email, confirmationCode: confirmationCode, clientId: clientId)
+        sessionManager.request(APIRouter.verifyUser(confirmationRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Resends a verification e-mail to new user.
+
+     - parameters:
+     - email: The user's e-mail address.
+     - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func resendUserVerification(email: String, completion: @escaping (_ error: Error?) -> Void) {
+        let resendRequest = ResendVerificationCodeRequest(email: email, clientId: clientId)
+        sessionManager.request(APIRouter.resendVerificationEmail(resendRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
     // MARK: - User CRUD
 
     /**

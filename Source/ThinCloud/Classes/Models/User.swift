@@ -10,6 +10,17 @@ struct UserRequest: Codable {
     let userId: String?
 }
 
+struct UserConfirmationCodeRequest: Codable {
+    let email: String
+    let confirmationCode: String
+    let clientId: String
+}
+
+struct ResendVerificationCodeRequest: Codable {
+    let email: String
+    let clientId: String
+}
+
 /// Representation of a user stored in ThinCloud.
 public struct User: Codable {
     /// The e-mail address of the user.

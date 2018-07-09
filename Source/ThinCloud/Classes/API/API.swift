@@ -16,6 +16,10 @@ enum APIRouter: URLRequestConvertible {
     case getUser(userId: String)
     case updateUser(userId: String, UserRequest)
     case deleteUser(userId: String)
+    case resendVerificationEmail(ResendVerificationCodeRequest)
+    case verifyUser(UserConfirmationCodeRequest)
+    case resetPassword(PasswordResetRequest)
+    case verifyResetPassword(VerifyPasswordResetRequest)
 
     // Client
     case getClients()
@@ -41,7 +45,11 @@ enum APIRouter: URLRequestConvertible {
         case .createUser,
              .createClient,
              .createDevice,
-             .createAuthToken:
+             .createAuthToken,
+             .resendVerificationEmail,
+             .resetPassword,
+             .verifyUser,
+             .verifyResetPassword:
             return .post
         case .getClient,
              .getClients,
@@ -69,6 +77,14 @@ enum APIRouter: URLRequestConvertible {
             return "oauth/tokens"
         case .createUser:
             return "users"
+        case .verifyUser:
+            return "users/verification"
+        case .resendVerificationEmail:
+            return "users/verification/send"
+        case .resetPassword:
+            return "users/reset_password"
+        case .verifyResetPassword:
+            return "users/reset_password/verification"
         case .createClient,
              .getClients:
             return "clients"
@@ -109,8 +125,6 @@ enum APIRouter: URLRequestConvertible {
         let encoder = JSONEncoder()
         switch self {
         case let .createAuthToken(authRequest):
-            // let snakeCaseEncoder = JSONEncoder()
-            // snakeCaseEncoder.keyEncodingStrategy = .convertToSnakeCase
             return try! encoder.encode(authRequest)
         case let .createUser(userRequest),
              let .updateUser(_, userRequest):
