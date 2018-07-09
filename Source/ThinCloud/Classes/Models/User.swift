@@ -26,7 +26,7 @@ public struct User: Codable {
     /// The e-mail address of the user.
     public let email: String
     /// The full name of the user.
-    public let fullName: String
+    public let name: String?
     /// The active state of the user.
     public let active: Bool?
     /// Key-value pairs of customer specified metadata.
