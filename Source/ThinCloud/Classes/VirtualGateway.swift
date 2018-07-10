@@ -46,9 +46,12 @@ public class VirtualGateway {
     /// The `VirtualGatewayDelegate` responsible for handling incoming ThinCloud Virtual Gateway commands.
     public var delegate: VirtualGatewayDelegate?
 
-    func updateCommandState(deviceId: String, commandId: String, state: DeviceCommand.State, completionHandler: @escaping (_ error: Error?, _ command: DeviceCommandResponse?) -> Void) {
+    func updateCommandState(deviceId: String, commandId: String, state: DeviceCommand.State, response: [String: AnyCodable]?, completionHandler: @escaping (_ error: Error?, _ command: DeviceCommandResponse?) -> Void) {
         let sessionManager = ThinCloud.shared.sessionManager
-        sessionManager.request(APIRouter.updateDeviceCommandsState(deviceId: deviceId, commandId: commandId, state: state)).validate().response { response in
+
+        let updateRequest = DeviceCommandUpdateRequest(state: state, response: response)
+
+        sessionManager.request(APIRouter.updateDeviceCommandsState(deviceId: deviceId, commandId: commandId, updates: updateRequest)).validate().response { response in
             if let error = response.error {
                 return completionHandler(error, nil)
             }
@@ -129,7 +132,7 @@ public class VirtualGateway {
                     ackDispatchGroup.enter()
 
                     // ACK
-                    self.updateCommandState(deviceId: command.deviceId, commandId: command.commandId, state: .ack) { _, updatedCommand in
+                    self.updateCommandState(deviceId: command.deviceId, commandId: command.commandId, state: .ack, response: nil) { _, updatedCommand in
                         guard response.error == nil, let updatedCommand = updatedCommand else {
                             return ackDispatchGroup.leave()
                         }
@@ -147,7 +150,7 @@ public class VirtualGateway {
 
                         for command in commands {
                             responseDispatchGroup.enter()
-                            self.updateCommandState(deviceId: command.deviceId, commandId: command.commandId, state: command.state) { _, _ in
+                            self.updateCommandState(deviceId: command.deviceId, commandId: command.commandId, state: command.state, response: command.response) { _, _ in
                                 responseDispatchGroup.leave()
                             }
                         }

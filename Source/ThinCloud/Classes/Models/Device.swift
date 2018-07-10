@@ -101,6 +101,11 @@ public struct DeviceCommand: Codable {
     public let updatedAt: Date?
 }
 
+struct DeviceCommandUpdateRequest: Codable {
+    let state: DeviceCommand.State
+    let response: [String: AnyCodable]?
+}
+
 typealias DeviceCommandResponse = DeviceCommand
 
 typealias DeviceResponse = Device

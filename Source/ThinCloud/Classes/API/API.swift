@@ -38,7 +38,7 @@ enum APIRouter: URLRequestConvertible {
     // Device Commands
     case getDeviceCommands(deviceId: String, state: DeviceCommandResponse.State)
     case updateDeviceCommands(deviceId: String, commandId: String)
-    case updateDeviceCommandsState(deviceId: String, commandId: String, state: DeviceCommandResponse.State)
+    case updateDeviceCommandsState(deviceId: String, commandId: String, updates: DeviceCommandUpdateRequest)
 
     var method: HTTPMethod {
         switch self {
@@ -142,8 +142,8 @@ enum APIRouter: URLRequestConvertible {
             return try! encoder.encode(deviceRequest)
         case let .updateDevice(_, deviceRequest):
             return try! encoder.encode(deviceRequest)
-        case let .updateDeviceCommandsState(_, _, state):
-            return try! encoder.encode(["state": state])
+        case let .updateDeviceCommandsState(_, _, stateRequest):
+            return try! encoder.encode(stateRequest)
         case let .createClient(clientRequest):
             return try! encoder.encode(clientRequest)
         default:
