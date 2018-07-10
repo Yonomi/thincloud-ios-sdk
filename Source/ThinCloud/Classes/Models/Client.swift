@@ -10,7 +10,7 @@ struct ClientRegistrationRequest: Codable {
     let deviceVersion: String
     let deviceToken: String
     let installId: String
-    let metadata: [String: String]? // TODO: Does this need to support all JSON value types?
+    let metadata: [String: AnyCodable]?
     let clientId: String?
     let userId: String?
 }
@@ -32,7 +32,7 @@ public struct Client: Codable {
     /// The unique ID of the mobile device associated with the client. On Apple platforms, this is identifierForVendor.
     public let installId: String
     /// Key-value pairs of customer specified metadata.
-    public let metadata: [String: String]?
+    public let metadata: [String: AnyCodable]?
     /// ThinCloud created client identifier.
     public let clientId: String?
     /// ThinCloud created user identifier.

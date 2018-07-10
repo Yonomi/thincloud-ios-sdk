@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fZz-jW-6CF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fZz-jW-6CF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -84,7 +84,7 @@
                                 <rect key="frame" x="146" y="622" width="82" height="30"/>
                                 <state key="normal" title="Create User"/>
                                 <connections>
-                                    <segue destination="LQE-WJ-bSk" kind="presentation" id="LrW-sd-V8X"/>
+                                    <segue destination="LQE-WJ-bSk" kind="show" id="LrW-sd-V8X"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haE-1H-0FG">
@@ -93,10 +93,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLc-TF-Rer">
+                                <rect key="frame" x="133" y="577" width="109" height="30"/>
+                                <state key="normal" title="Reset Password"/>
+                                <connections>
+                                    <segue destination="QY9-yA-4Et" kind="show" id="ua8-gM-lC0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="haE-1H-0FG" firstAttribute="leading" secondItem="Qe1-tT-Htc" secondAttribute="leadingMargin" id="7fQ-Ke-eRT"/>
+                            <constraint firstItem="tLc-TF-Rer" firstAttribute="centerX" secondItem="Qe1-tT-Htc" secondAttribute="centerX" id="9UC-Ot-AdJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6ps-te-Rlh" secondAttribute="trailing" id="Cpr-Ba-M39"/>
                             <constraint firstItem="6ps-te-Rlh" firstAttribute="centerX" secondItem="Qe1-tT-Htc" secondAttribute="centerX" id="EgH-48-vpN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VP8-EK-GJQ" secondAttribute="trailing" id="FYV-dJ-c1t"/>
@@ -107,6 +115,7 @@
                             <constraint firstItem="1cb-mI-3cE" firstAttribute="top" secondItem="xJl-F0-eaP" secondAttribute="bottom" constant="15" id="dhQ-0r-BWP"/>
                             <constraint firstItem="xJl-F0-eaP" firstAttribute="centerX" secondItem="Qe1-tT-Htc" secondAttribute="centerX" id="hUO-7P-xaB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="haE-1H-0FG" secondAttribute="trailing" id="hlt-SO-TkM"/>
+                            <constraint firstItem="xJl-F0-eaP" firstAttribute="top" secondItem="tLc-TF-Rer" secondAttribute="bottom" constant="15" id="mTD-yh-tNQ"/>
                             <constraint firstItem="6ps-te-Rlh" firstAttribute="top" secondItem="VP8-EK-GJQ" secondAttribute="bottom" constant="25" id="nIi-S2-gtV"/>
                         </constraints>
                     </view>
@@ -261,7 +270,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0zN-aa-69P">
-                                <rect key="frame" x="16" y="116" width="343" height="210"/>
+                                <rect key="frame" x="16" y="64" width="343" height="210"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb4-c5-7hX">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -327,8 +336,8 @@
             <objects>
                 <navigationController id="DVh-Ei-mMG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="User" id="sKn-vu-zad"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Je6-Ha-4qF">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Je6-Ha-4qF">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -367,7 +376,7 @@
                                         <rect key="frame" x="0.0" y="45" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                         <connections>
                                             <action selector="textFieldEditingChanged:" destination="LQE-WJ-bSk" eventType="editingChanged" id="Wzb-Tz-w2c"/>
                                         </connections>
@@ -435,7 +444,7 @@
                         <outlet property="nameTextField" destination="i7q-ld-n16" id="xGh-Yw-RsC"/>
                         <outlet property="passwordTextField" destination="hBn-nf-Fdr" id="TR1-Jt-iGa"/>
                         <outlet property="signUpButton" destination="9jk-H2-hv7" id="9Ck-Gi-off"/>
-                        <segue destination="dMO-mK-vqD" kind="show" identifier="signInToAppFromSignUpSegueIdentifier" id="65l-75-TbQ"/>
+                        <segue destination="XE5-QA-LxA" kind="show" identifier="confirmationCodeSegueIdentifier" id="gxk-Ox-laX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IS1-kO-mci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -549,8 +558,285 @@
             </objects>
             <point key="canvasLocation" x="1062" y="1317"/>
         </scene>
+        <!--Reset Password View Controller-->
+        <scene sceneID="Kic-RJ-EaD">
+            <objects>
+                <viewController id="QY9-yA-4Et" customClass="ResetPasswordViewController" customModule="ThinCloud_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w07-pJ-JWj"/>
+                        <viewControllerLayoutGuide type="bottom" id="e1b-eQ-g7s"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="H03-6Q-JhU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="k6M-aH-GV8">
+                                <rect key="frame" x="16" y="294.5" width="343" height="78"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Bx1-1N-nG4">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                        <connections>
+                                            <action selector="textFieldEditingChanged:" destination="QY9-yA-4Et" eventType="editingChanged" id="phQ-dC-MQs"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOW-0u-gYq">
+                                        <rect key="frame" x="0.0" y="45" width="343" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Reset Password"/>
+                                        <connections>
+                                            <action selector="resetTouched:" destination="QY9-yA-4Et" eventType="touchUpInside" id="2MY-QU-t14"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThinCloud SDK Example" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRW-yj-Ho1">
+                                <rect key="frame" x="16" y="238" width="343" height="31.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-ye-eIg">
+                                <rect key="frame" x="16" y="387.5" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZT-zU-aZZ">
+                                <rect key="frame" x="306" y="28" width="53" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTouched:" destination="QY9-yA-4Et" eventType="touchUpInside" id="c9l-yC-BFy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="k6M-aH-GV8" firstAttribute="leading" secondItem="H03-6Q-JhU" secondAttribute="leadingMargin" id="0tY-sy-Ebt"/>
+                            <constraint firstItem="gZT-zU-aZZ" firstAttribute="top" secondItem="w07-pJ-JWj" secondAttribute="bottom" constant="8" id="8TQ-er-9C4"/>
+                            <constraint firstItem="k6M-aH-GV8" firstAttribute="top" secondItem="TRW-yj-Ho1" secondAttribute="bottom" constant="25" id="GAq-75-1oM"/>
+                            <constraint firstItem="TRW-yj-Ho1" firstAttribute="leading" secondItem="H03-6Q-JhU" secondAttribute="leadingMargin" id="GsJ-zW-cbA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mRd-ye-eIg" secondAttribute="trailing" id="HMh-gc-H3e"/>
+                            <constraint firstItem="gZT-zU-aZZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H03-6Q-JhU" secondAttribute="leadingMargin" id="Mxv-4E-J3Y"/>
+                            <constraint firstItem="mRd-ye-eIg" firstAttribute="top" secondItem="k6M-aH-GV8" secondAttribute="bottom" constant="15" id="Nij-oD-A8I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TRW-yj-Ho1" secondAttribute="trailing" id="arY-my-z8a"/>
+                            <constraint firstItem="gZT-zU-aZZ" firstAttribute="trailing" secondItem="H03-6Q-JhU" secondAttribute="trailingMargin" id="bPw-l0-1lf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k6M-aH-GV8" secondAttribute="trailing" id="fwq-aS-fmm"/>
+                            <constraint firstItem="mRd-ye-eIg" firstAttribute="leading" secondItem="H03-6Q-JhU" secondAttribute="leadingMargin" id="g0o-5w-bR7"/>
+                            <constraint firstItem="k6M-aH-GV8" firstAttribute="centerX" secondItem="H03-6Q-JhU" secondAttribute="centerX" id="t5Q-yc-abg"/>
+                            <constraint firstItem="k6M-aH-GV8" firstAttribute="centerY" secondItem="H03-6Q-JhU" secondAttribute="centerY" id="wRJ-rq-Hhc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="Bx1-1N-nG4" id="WA0-h5-T8S"/>
+                        <outlet property="environmentLabel" destination="mRd-ye-eIg" id="iD4-qY-RIr"/>
+                        <outlet property="resetButton" destination="sOW-0u-gYq" id="B5X-YO-MUb"/>
+                        <segue destination="b79-tJ-tdf" kind="show" identifier="newPasswordSegueIdentifier" id="css-Sp-t9N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hZB-rL-3EU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1807" y="2043"/>
+        </scene>
+        <!--New Password View Controller-->
+        <scene sceneID="Zhv-YV-hJU">
+            <objects>
+                <viewController id="b79-tJ-tdf" customClass="NewPasswordViewController" customModule="ThinCloud_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3u5-Dt-adl"/>
+                        <viewControllerLayoutGuide type="bottom" id="5vo-kS-MNj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ykq-zu-Ect">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="27L-EL-7re">
+                                <rect key="frame" x="16" y="249.5" width="343" height="168"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4g1-OL-7wl">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RIg-Go-Nhf">
+                                        <rect key="frame" x="0.0" y="45" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldEditingChanged:" destination="b79-tJ-tdf" eventType="editingChanged" id="I7I-dO-dJd"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ad4-R4-a0V">
+                                        <rect key="frame" x="0.0" y="90" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                        <connections>
+                                            <action selector="textFieldEditingChanged:" destination="b79-tJ-tdf" eventType="editingChanged" id="1PJ-ej-HoE"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8D9-OB-Gn2">
+                                        <rect key="frame" x="0.0" y="135" width="343" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Change Password"/>
+                                        <connections>
+                                            <action selector="changeTouched:" destination="b79-tJ-tdf" eventType="touchUpInside" id="nex-rh-qJU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThinCloud SDK Example" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPf-Qn-9Qa">
+                                <rect key="frame" x="16" y="193" width="343" height="31.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-Ls-Xcm">
+                                <rect key="frame" x="16" y="432.5" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xm-Y2-ig0">
+                                <rect key="frame" x="306" y="28" width="53" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTouched:" destination="b79-tJ-tdf" eventType="touchUpInside" id="kF9-T3-wrA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4xm-Y2-ig0" firstAttribute="trailing" secondItem="ykq-zu-Ect" secondAttribute="trailingMargin" id="G3X-xP-I1U"/>
+                            <constraint firstItem="3p4-Ls-Xcm" firstAttribute="leading" secondItem="ykq-zu-Ect" secondAttribute="leadingMargin" id="KwD-oh-A0U"/>
+                            <constraint firstItem="27L-EL-7re" firstAttribute="centerY" secondItem="ykq-zu-Ect" secondAttribute="centerY" id="Ti0-WM-mGF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="27L-EL-7re" secondAttribute="trailing" id="boj-4H-vSb"/>
+                            <constraint firstItem="27L-EL-7re" firstAttribute="centerX" secondItem="ykq-zu-Ect" secondAttribute="centerX" id="eEj-qo-FQm"/>
+                            <constraint firstItem="zPf-Qn-9Qa" firstAttribute="leading" secondItem="ykq-zu-Ect" secondAttribute="leadingMargin" id="gP9-f1-4zi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zPf-Qn-9Qa" secondAttribute="trailing" id="gRS-IJ-Ubb"/>
+                            <constraint firstItem="27L-EL-7re" firstAttribute="leading" secondItem="ykq-zu-Ect" secondAttribute="leadingMargin" id="gwC-KU-8BK"/>
+                            <constraint firstItem="4xm-Y2-ig0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ykq-zu-Ect" secondAttribute="leadingMargin" id="kxY-9Y-vHU"/>
+                            <constraint firstItem="3p4-Ls-Xcm" firstAttribute="top" secondItem="27L-EL-7re" secondAttribute="bottom" constant="15" id="kzE-6h-mgM"/>
+                            <constraint firstItem="4xm-Y2-ig0" firstAttribute="top" secondItem="3u5-Dt-adl" secondAttribute="bottom" constant="8" id="m1g-iX-HXj"/>
+                            <constraint firstItem="27L-EL-7re" firstAttribute="top" secondItem="zPf-Qn-9Qa" secondAttribute="bottom" constant="25" id="sZT-qz-JCD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3p4-Ls-Xcm" secondAttribute="trailing" id="yVt-bN-azx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="changeButton" destination="8D9-OB-Gn2" id="XDN-gM-z4a"/>
+                        <outlet property="confirmationCodeTextField" destination="RIg-Go-Nhf" id="bAX-qg-pO7"/>
+                        <outlet property="emailTextField" destination="4g1-OL-7wl" id="AZl-cc-JEw"/>
+                        <outlet property="environmentLabel" destination="3p4-Ls-Xcm" id="4MB-5B-yhv"/>
+                        <outlet property="passwordTextField" destination="ad4-R4-a0V" id="KMW-Be-bcc"/>
+                        <segue destination="Hmi-RD-tWn" kind="unwind" identifier="unwindToSignInSegueIdentifier" unwindAction="unwindToSignInSegue:" id="wOT-d1-CxR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tFt-Fd-c2A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Hmi-RD-tWn" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1807" y="2734"/>
+        </scene>
+        <!--Verify User View Controller-->
+        <scene sceneID="hMY-KY-NLY">
+            <objects>
+                <viewController id="XE5-QA-LxA" customClass="VerifyUserViewController" customModule="ThinCloud_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8o1-Uc-dHi"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pvy-f3-J7L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GXN-8P-5Wj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="f36-0R-1G3">
+                                <rect key="frame" x="16" y="272" width="343" height="123"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0wX-Zd-Siu">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                        <connections>
+                                            <action selector="textFieldEditingChanged:" destination="XE5-QA-LxA" eventType="editingChanged" id="ZRc-Ec-xIm"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YQ0-ui-C4T">
+                                        <rect key="frame" x="0.0" y="45" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldEditingChanged:" destination="XE5-QA-LxA" eventType="editingChanged" id="cdn-cR-YSF"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QF-2p-lQx">
+                                        <rect key="frame" x="0.0" y="90" width="343" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Verify Account"/>
+                                        <connections>
+                                            <action selector="verifyTouched:" destination="XE5-QA-LxA" eventType="touchUpInside" id="RA7-2t-qkf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThinCloud SDK Example" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ1-U8-8ax">
+                                <rect key="frame" x="16" y="216" width="343" height="31.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6U-1q-Syk">
+                                <rect key="frame" x="306" y="28" width="53" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTouched:" destination="XE5-QA-LxA" eventType="touchUpInside" id="9xE-6K-fRG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZy-S6-nlv">
+                                <rect key="frame" x="16" y="410" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="AZy-S6-nlv" secondAttribute="trailing" id="CJC-bQ-meB"/>
+                            <constraint firstItem="f36-0R-1G3" firstAttribute="leading" secondItem="GXN-8P-5Wj" secondAttribute="leadingMargin" id="Gfq-HK-CXW"/>
+                            <constraint firstItem="f36-0R-1G3" firstAttribute="centerX" secondItem="GXN-8P-5Wj" secondAttribute="centerX" id="Jeg-lB-8QC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oQ1-U8-8ax" secondAttribute="trailing" id="Mge-Q1-TRA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f36-0R-1G3" secondAttribute="trailing" id="PYi-41-LfU"/>
+                            <constraint firstItem="AZy-S6-nlv" firstAttribute="top" secondItem="f36-0R-1G3" secondAttribute="bottom" constant="15" id="RRK-JW-fVh"/>
+                            <constraint firstItem="AZy-S6-nlv" firstAttribute="leading" secondItem="GXN-8P-5Wj" secondAttribute="leadingMargin" id="RWs-HN-0K8"/>
+                            <constraint firstItem="o6U-1q-Syk" firstAttribute="top" secondItem="8o1-Uc-dHi" secondAttribute="bottom" constant="8" id="XMf-8n-obl"/>
+                            <constraint firstItem="o6U-1q-Syk" firstAttribute="trailing" secondItem="GXN-8P-5Wj" secondAttribute="trailingMargin" id="ZOs-Bx-oSU"/>
+                            <constraint firstItem="oQ1-U8-8ax" firstAttribute="leading" secondItem="GXN-8P-5Wj" secondAttribute="leadingMargin" id="gf4-MR-rYg"/>
+                            <constraint firstItem="f36-0R-1G3" firstAttribute="top" secondItem="oQ1-U8-8ax" secondAttribute="bottom" constant="25" id="lE7-rg-S2S"/>
+                            <constraint firstItem="f36-0R-1G3" firstAttribute="centerY" secondItem="GXN-8P-5Wj" secondAttribute="centerY" id="sMd-Yl-on2"/>
+                            <constraint firstItem="o6U-1q-Syk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GXN-8P-5Wj" secondAttribute="leadingMargin" id="twM-E0-SmD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmationCodeTextField" destination="YQ0-ui-C4T" id="IM0-Fq-xgg"/>
+                        <outlet property="emailTextField" destination="0wX-Zd-Siu" id="Lsu-Zl-nof"/>
+                        <outlet property="environmentLabel" destination="AZy-S6-nlv" id="2RZ-kz-sZ6"/>
+                        <outlet property="verifyButton" destination="8QF-2p-lQx" id="v6p-35-Mfj"/>
+                        <segue destination="dMO-mK-vqD" kind="show" identifier="signInToAppFromSignUpVerificationSegueIdentifier" id="EOV-XK-XrF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q2a-Vm-n8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-911" y="2445"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="65l-75-TbQ"/>
+        <segue reference="3MK-E7-bGQ"/>
     </inferredMetricsTieBreakers>
 </document>

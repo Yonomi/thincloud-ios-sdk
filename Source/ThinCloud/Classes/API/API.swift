@@ -14,8 +14,12 @@ enum APIRouter: URLRequestConvertible {
     // User
     case createUser(UserRequest)
     case getUser(userId: String)
-    case updateUser(userId: String, UserRequest)
+    case updateUser(userId: String, UserUpdateRequest)
     case deleteUser(userId: String)
+    case resendVerificationEmail(ResendVerificationCodeRequest)
+    case verifyUser(UserConfirmationCodeRequest)
+    case resetPassword(PasswordResetRequest)
+    case verifyResetPassword(VerifyPasswordResetRequest)
 
     // Client
     case getClients()
@@ -26,22 +30,26 @@ enum APIRouter: URLRequestConvertible {
 
     // Device
     case getDevices()
-    case createDevice(DeviceRequest)
+    case createDevice(DeviceCreateRequest)
     case getDevice(deviceId: String)
-    case updateDevice(deviceId: String, DeviceRequest)
+    case updateDevice(deviceId: String, DeviceUpdateRequest)
     case deleteDevice(deviceId: String)
 
     // Device Commands
     case getDeviceCommands(deviceId: String, state: DeviceCommandResponse.State)
     case updateDeviceCommands(deviceId: String, commandId: String)
-    case updateDeviceCommandsState(deviceId: String, commandId: String, state: DeviceCommandResponse.State)
+    case updateDeviceCommandsState(deviceId: String, commandId: String, updates: DeviceCommandUpdateRequest)
 
     var method: HTTPMethod {
         switch self {
         case .createUser,
              .createClient,
              .createDevice,
-             .createAuthToken:
+             .createAuthToken,
+             .resendVerificationEmail,
+             .resetPassword,
+             .verifyUser,
+             .verifyResetPassword:
             return .post
         case .getClient,
              .getClients,
@@ -69,6 +77,14 @@ enum APIRouter: URLRequestConvertible {
             return "oauth/tokens"
         case .createUser:
             return "users"
+        case .verifyUser:
+            return "users/verification"
+        case .resendVerificationEmail:
+            return "users/verification/send"
+        case .resetPassword:
+            return "users/reset_password"
+        case .verifyResetPassword:
+            return "users/reset_password/verification"
         case .createClient,
              .getClients:
             return "clients"
@@ -109,14 +125,25 @@ enum APIRouter: URLRequestConvertible {
         let encoder = JSONEncoder()
         switch self {
         case let .createAuthToken(authRequest):
-            // let snakeCaseEncoder = JSONEncoder()
-            // snakeCaseEncoder.keyEncodingStrategy = .convertToSnakeCase
             return try! encoder.encode(authRequest)
-        case let .createUser(userRequest),
-             let .updateUser(_, userRequest):
+        case let .resendVerificationEmail(resendRequest):
+            return try! encoder.encode(resendRequest)
+        case let .verifyUser(verifyRequest):
+            return try! encoder.encode(verifyRequest)
+        case let .resetPassword(resetRequest):
+            return try! encoder.encode(resetRequest)
+        case let .verifyResetPassword(verifyRequest):
+            return try! encoder.encode(verifyRequest)
+        case let .createUser(userRequest):
             return try! encoder.encode(userRequest)
-        case let .updateDeviceCommandsState(_, _, state):
-            return try! encoder.encode(["state": state])
+        case let .updateUser(_, userRequest):
+            return try! encoder.encode(userRequest)
+        case let .createDevice(deviceRequest):
+            return try! encoder.encode(deviceRequest)
+        case let .updateDevice(_, deviceRequest):
+            return try! encoder.encode(deviceRequest)
+        case let .updateDeviceCommandsState(_, _, stateRequest):
+            return try! encoder.encode(stateRequest)
         case let .createClient(clientRequest):
             return try! encoder.encode(clientRequest)
         default:

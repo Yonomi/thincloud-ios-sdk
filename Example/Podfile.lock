@@ -13,7 +13,7 @@ DEPENDENCIES:
   - ThinCloud (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Nimble
     - Quick
@@ -28,8 +28,8 @@ SPEC CHECKSUMS:
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
-  ThinCloud: 9bbe12e6d3fbbef49820ee48284b8dff993365cd
+  ThinCloud: f5d988d96531f3285ced3716c4a493e237d7abae
 
 PODFILE CHECKSUM: b3d9b5ae1475d71668a82ad4a14dc198c52be2e7
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
