@@ -1,6 +1,89 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyCodable.swift",
+      "line": 20,
+      "symbol": "AnyCodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyCodable.swift",
+      "line": 20,
+      "symbol": "AnyCodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyDecodable.swift",
+      "line": null,
+      "symbol": "_AnyDecodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyDecodable.swift",
+      "line": null,
+      "symbol": "_AnyDecodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyDecodable.swift",
+      "line": 35,
+      "symbol": "AnyDecodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyDecodable.swift",
+      "line": 35,
+      "symbol": "AnyDecodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": null,
+      "symbol": "_AnyEncodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": null,
+      "symbol": "_AnyEncodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": null,
+      "symbol": "_AnyEncodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": null,
+      "symbol": "_AnyEncodable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": 33,
+      "symbol": "AnyEncodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/geraldpatterson/Code/thincloud-ios-sdk/Source/ThinCloud/Classes/Extensions/AnyCodable/AnyEncodable.swift",
+      "line": 33,
+      "symbol": "AnyEncodable.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
-  "source_directory": "/Users/geraldpatterson/Code/tcsdk-docs"
+  "source_directory": "/Users/geraldpatterson/Code/thincloud-ios-sdk"
 }

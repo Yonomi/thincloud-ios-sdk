@@ -14,7 +14,7 @@
     <a title="ThinCloud Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ThinCloud Docs</a> (100% documented)</p>
+        <p><a href="../index.html">ThinCloud Docs</a> (95% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -58,6 +58,15 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/AnyCodable.html">AnyCodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyDecodable.html">AnyDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnyEncodable.html">AnyEncodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Client.html">Client</a>
               </li>
               <li class="nav-group-task">
@@ -70,10 +79,19 @@
                 <a href="../Structs/DeviceCommand/State.html">– State</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs.html#/s:9ThinCloud19DeviceCreateRequestV">DeviceCreateRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:9ThinCloud19DeviceUpdateRequestV">DeviceUpdateRequest</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Location.html">Location</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:9ThinCloud17UserUpdateRequestV">UserUpdateRequest</a>
               </li>
             </ul>
           </li>
@@ -464,6 +482,274 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC13resetPasswordySS5email_ys5Error_pSgc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/resetPassword(email:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC13resetPasswordySS5email_ys5Error_pSgc10completiontF">resetPassword(email:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Begins the user password reset process.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resetPassword</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>email</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a reset attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC19verifyResetPasswordySS5email_SS8passwordSS16confirmationCodeys5Error_pSgc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/verifyResetPassword(email:password:confirmationCode:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC19verifyResetPasswordySS5email_SS8passwordSS16confirmationCodeys5Error_pSgc10completiontF">verifyResetPassword(email:password:confirmationCode:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Verifies a password change of a user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verifyResetPassword</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">confirmationCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>email</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user&rsquo;s new password.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>confirmationCode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The confirmation code sent to the user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a sign in attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC10verifyUserySS5email_SS16confirmationCodeys5Error_pSgc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/verifyUser(email:confirmationCode:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC10verifyUserySS5email_SS16confirmationCodeys5Error_pSgc10completiontF">verifyUser(email:confirmationCode:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Verifies a new user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verifyUser</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">confirmationCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>email</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>confirmationCode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The confirmation code sent to the user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a sign in attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC22resendUserVerificationySS5email_ys5Error_pSgc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/resendUserVerification(email:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC22resendUserVerificationySS5email_ys5Error_pSgc10completiontF">resendUserVerification(email:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Resends a verification e-mail to new user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resendUserVerification</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>email</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user&rsquo;s e-mail address.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a sign in attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -606,9 +892,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9ThinCloudAAC10updateUseryAA0D0V_ys5Error_pSg_AESgtc10completiontF"></a>
+                    <a name="/s:9ThinCloudAAC10updateUseryAA0D13UpdateRequestV_ys5Error_pSg_AA0D0VSgtc10completiontF"></a>
                     <a name="//apple_ref/swift/Method/updateUser(_:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9ThinCloudAAC10updateUseryAA0D0V_ys5Error_pSg_AESgtc10completiontF">updateUser(_:completion:)</a>
+                    <a class="token" href="#/s:9ThinCloudAAC10updateUseryAA0D13UpdateRequestV_ys5Error_pSg_AA0D0VSgtc10completiontF">updateUser(_:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -616,14 +902,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Updates a user.</p>
+                        <p>Updates a the signed in user associated with the ThinCloud SDK instance.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateUser</span><span class="p">(</span><span class="n">_</span> <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Structs/User.html">User</a></span><span class="p">,</span> <span class="n">completion</span> <span class="nv">_</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Structs/User.html">User</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateUser</span><span class="p">(</span><span class="n">_</span> <span class="nv">updates</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:9ThinCloud17UserUpdateRequestV">UserUpdateRequest</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">user</span><span class="p">:</span> <span class="kt"><a href="../Structs/User.html">User</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -634,12 +920,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>user</em>
+                                <em>updates</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The user to update.</p>
+                                  <p>The changes to the user.</p>
                                 </div>
                               </td>
                             </tr>
@@ -764,6 +1050,250 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC9getDeviceySS8deviceId_ys5Error_pSg_AA0D0VSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/getDevice(deviceId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC9getDeviceySS8deviceId_ys5Error_pSg_AA0D0VSgtc10completiontF">getDevice(deviceId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetches a specified device by its deviceId.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getDevice</span><span class="p">(</span><span class="nv">deviceId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Structs/Device.html">Device</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ThinCloud generated device identifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a device fetch attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC12createDeviceyAA0D13CreateRequestV6device_ys5Error_pSg_AA0D0VSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/createDevice(device:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC12createDeviceyAA0D13CreateRequestV6device_ys5Error_pSg_AA0D0VSgtc10completiontF">createDevice(device:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a device.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createDevice</span><span class="p">(</span><span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:9ThinCloud19DeviceCreateRequestV">DeviceCreateRequest</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Structs/Device.html">Device</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>device</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The device to create.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a device creation attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC12updateDeviceySS8deviceId_AA0D13UpdateRequestV7updatesys5Error_pSg_AA0D0VSgtc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/updateDevice(deviceId:updates:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC12updateDeviceySS8deviceId_AA0D13UpdateRequestV7updatesys5Error_pSg_AA0D0VSgtc10completiontF">updateDevice(deviceId:updates:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates a device.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateDevice</span><span class="p">(</span><span class="nv">deviceId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">updates</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:9ThinCloud19DeviceUpdateRequestV">DeviceUpdateRequest</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt"><a href="../Structs/Device.html">Device</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ThinCloud generated device identifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updates</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The changes to the device.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a device update attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9ThinCloudAAC12deleteDeviceySS8deviceId_ys5Error_pSgc10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/deleteDevice(deviceId:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloudAAC12deleteDeviceySS8deviceId_ys5Error_pSgc10completiontF">deleteDevice(deviceId:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deletes a device.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteDevice</span><span class="p">(</span><span class="nv">deviceId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ThinCloud generated device identifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The handler called after a device deletion attempt is completed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -826,7 +1356,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/Yonomi/thincloud-ios-sdk" target="_blank" rel="external">Yonomi</a>. All rights reserved. (Last updated: 2018-04-30)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/Yonomi/thincloud-ios-sdk" target="_blank" rel="external">Yonomi</a>. All rights reserved. (Last updated: 2018-07-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

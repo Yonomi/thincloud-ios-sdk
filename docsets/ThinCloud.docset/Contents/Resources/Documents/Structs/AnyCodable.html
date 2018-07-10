@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ThinCloudError Enumeration Reference</title>
+    <title>AnyCodable Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ThinCloudError" class="dashAnchor"></a>
-    <a title="ThinCloudError Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Struct/AnyCodable" class="dashAnchor"></a>
+    <a title="AnyCodable Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">ThinCloud Docs</a> (95% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ThinCloud Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ThinCloudError Enumeration Reference
+        AnyCodable Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -100,14 +100,31 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ThinCloudError</h1>
+            <h1>AnyCodable</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ThinCloudError</span><span class="p">:</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyCodable</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
 
                 </div>
               </div>
-            <p>ThinCloud SDK Errors.</p>
+            <p>A type-erased <code>Codable</code> value.</p>
+
+<p>The <code>AnyCodable</code> type forwards encoding and decoding responsibilities
+to an underlying value, hiding its specific underlying type.</p>
+
+<p>You can encode or decode mixed-type values in dictionaries
+and other collections that require <code>Encodable</code> or <code>Decodable</code> conformance
+by declaring their contained type to be <code>AnyCodable</code>.</p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code><a href="../Structs/AnyEncodable.html">AnyEncodable</a></code>
+
+</div>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code><a href="../Structs/AnyDecodable.html">AnyDecodable</a></code>
+
+</div>
 
           </section>
           <section class="section task-group-section">
@@ -116,9 +133,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9ThinCloud0aB5ErrorO16notAuthenticatedA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/notAuthenticated" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9ThinCloud0aB5ErrorO16notAuthenticatedA2CmF">notAuthenticated</a>
+                    <a name="/s:9ThinCloud10AnyCodableV5valueypvp"></a>
+                    <a name="//apple_ref/swift/Property/value" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud10AnyCodableV5valueypvp">value</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -126,14 +143,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A call was made to a resource that requires authentication.</p>
+                        <p>The type-erased underlying value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notAuthenticated</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Any</span></code></pre>
 
                         </div>
                       </div>
@@ -147,9 +164,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9ThinCloud0aB5ErrorO08responseC0A2CmF"></a>
-                    <a name="//apple_ref/swift/Element/responseError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9ThinCloud0aB5ErrorO08responseC0A2CmF">responseError</a>
+                    <a name="/s:s9EquatableP2eeoiSbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EquatableP2eeoiSbx_xtFZ">==(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -157,14 +174,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The ThinCloud backend returned an unexpected response.</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">responseError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">AnyCodable</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">AnyCodable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -178,9 +194,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9ThinCloud0aB5ErrorO015deserializationC0A2CmF"></a>
-                    <a name="//apple_ref/swift/Element/deserializationError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9ThinCloud0aB5ErrorO015deserializationC0A2CmF">deserializationError</a>
+                    <a name="/s:9ThinCloud10AnyCodableV11descriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud10AnyCodableV11descriptionSSvp">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,14 +204,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The ThinCloud backend returned a payload that could not be deserialized from JSON.</p>
+                        <p>A string representation of the codable object.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">deserializationError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -209,9 +225,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9ThinCloud0aB5ErrorO07unknownC0A2CmF"></a>
-                    <a name="//apple_ref/swift/Element/unknownError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9ThinCloud0aB5ErrorO07unknownC0A2CmF">unknownError</a>
+                    <a name="/s:9ThinCloud10AnyCodableV16debugDescriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9ThinCloud10AnyCodableV16debugDescriptionSSvp">debugDescription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -219,14 +235,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An unknown error ocurred.</p>
+                        <p>Returns a string that describes the contents of the receiver for presentation in the debugger.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unknownError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
