@@ -14,7 +14,7 @@ enum APIRouter: URLRequestConvertible {
     // User
     case createUser(UserRequest)
     case getUser(userId: String)
-    case updateUser(userId: String, UserRequest)
+    case updateUser(userId: String, UserUpdateRequest)
     case deleteUser(userId: String)
     case resendVerificationEmail(ResendVerificationCodeRequest)
     case verifyUser(UserConfirmationCodeRequest)
@@ -30,9 +30,9 @@ enum APIRouter: URLRequestConvertible {
 
     // Device
     case getDevices()
-    case createDevice(DeviceRequest)
+    case createDevice(DeviceCreateRequest)
     case getDevice(deviceId: String)
-    case updateDevice(deviceId: String, DeviceRequest)
+    case updateDevice(deviceId: String, DeviceUpdateRequest)
     case deleteDevice(deviceId: String)
 
     // Device Commands
@@ -126,9 +126,14 @@ enum APIRouter: URLRequestConvertible {
         switch self {
         case let .createAuthToken(authRequest):
             return try! encoder.encode(authRequest)
-        case let .createUser(userRequest),
-             let .updateUser(_, userRequest):
+        case let .createUser(userRequest):
             return try! encoder.encode(userRequest)
+        case let .updateUser(_, userRequest):
+            return try! encoder.encode(userRequest)
+        case let .createDevice(deviceRequest):
+            return try! encoder.encode(deviceRequest)
+        case let .updateDevice(_, deviceRequest):
+            return try! encoder.encode(deviceRequest)
         case let .updateDeviceCommandsState(_, _, state):
             return try! encoder.encode(["state": state])
         case let .createClient(clientRequest):

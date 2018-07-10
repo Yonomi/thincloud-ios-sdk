@@ -11,11 +11,23 @@ public struct Location: Codable {
     public let coordinates: [Double]
 }
 
-struct DeviceRequest: Codable {
-    let deviceId: String
+/// Representation of a device creation request to ThinCloud.
+public struct DeviceCreateRequest: Codable {
+    /// The devicetype identifier of the device.
     let devicetypeId: String
+    /// The physical identifier of the device, i.e. MAC address.
     let physicalId: String
+    /// The GeoJSON represenation of the device's location
     let location: Location?
+    /// Key-value pairs of customer specified metadata.
+    let custom: [String: AnyCodable]?
+}
+
+/// Representation of a device update request to ThinCloud.
+public struct DeviceUpdateRequest: Codable {
+    /// The GeoJSON represenation of the device's location
+    let location: Location?
+    /// Key-value pairs of customer specified metadata.
     let custom: [String: AnyCodable]?
 }
 
@@ -80,7 +92,6 @@ public struct DeviceCommand: Codable {
     /// Key-value pairs of customer specified incoming request data.
     public let request: [String: AnyCodable]?
     /// Key-value pairs of customer specified outgoing response data.
-    /// Custom response information associated with the command.
     public var response: [String: AnyCodable]?
     /// The state of the device command.
     public var state: State
