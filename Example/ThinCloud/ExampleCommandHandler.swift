@@ -24,6 +24,7 @@ class ExampleCommandHandler: VirtualGatewayDelegate {
             // We successfully handled the command 😄
             var updatedCommand = command
             updatedCommand.state = .completed
+            updatedCommand.response = ["some": "response", "hello": true]
 
             updatedCommands.append(updatedCommand)
         }

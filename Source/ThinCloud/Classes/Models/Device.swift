@@ -11,12 +11,24 @@ public struct Location: Codable {
     public let coordinates: [Double]
 }
 
-struct DeviceRequest: Codable {
-    let deviceId: String
+/// Representation of a device creation request to ThinCloud.
+public struct DeviceCreateRequest: Codable {
+    /// The devicetype identifier of the device.
     let devicetypeId: String
+    /// The physical identifier of the device, i.e. MAC address.
     let physicalId: String
+    /// The GeoJSON represenation of the device's location
     let location: Location?
-    let custom: [String: String]? // TODO: Does this need to support all JSON value types?
+    /// Key-value pairs of customer specified metadata.
+    let custom: [String: AnyCodable]?
+}
+
+/// Representation of a device update request to ThinCloud.
+public struct DeviceUpdateRequest: Codable {
+    /// The GeoJSON represenation of the device's location
+    let location: Location?
+    /// Key-value pairs of customer specified metadata.
+    let custom: [String: AnyCodable]?
 }
 
 /// Representation of a device stored in ThinCloud.
@@ -32,7 +44,7 @@ public struct Device: Codable {
     /// The GeoJSON represenation of the device's location
     public let location: Location?
     /// Key-value pairs of customer specified metadata.
-    public let custom: [String: String]?
+    public let custom: [String: AnyCodable]?
     /// Commissioning state of the device.
     public let commissioning: Bool?
     /// Connectivity state of the device.
@@ -77,14 +89,21 @@ public struct DeviceCommand: Codable {
     public let name: String
     /// ThinCloud generated user identifier.
     public let userId: String
-//    public let request: [String: String]?
-//    public var response: [String: String]?
+    /// Key-value pairs of customer specified incoming request data.
+    public let request: [String: AnyCodable]?
+    /// Key-value pairs of customer specified outgoing response data.
+    public var response: [String: AnyCodable]?
     /// The state of the device command.
     public var state: State
     /// Date the command was created.
     public let createdAt: Date?
     /// Date the command was last updated.
     public let updatedAt: Date?
+}
+
+struct DeviceCommandUpdateRequest: Codable {
+    let state: DeviceCommand.State
+    let response: [String: AnyCodable]?
 }
 
 typealias DeviceCommandResponse = DeviceCommand

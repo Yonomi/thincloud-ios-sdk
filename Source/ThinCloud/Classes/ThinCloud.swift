@@ -183,6 +183,90 @@ public class ThinCloud: OAuth2TokenDelegate {
         currentUser = nil
         currentClient = nil
         SecurePersistence.clear()
+        sessionManager.retrier = nil
+        sessionManager.adapter = nil
+        sessionManager.session.getAllTasks { tasks in
+            tasks.forEach({ $0.cancel() })
+        }
+    }
+
+    /**
+     Begins the user password reset process.
+
+     - parameters:
+        - email: The user's e-mail address.
+        - completion: The handler called after a reset attempt is completed.
+
+     */
+    public func resetPassword(email: String, completion: @escaping (_ error: Error?) -> Void) {
+        let resetRequest = PasswordResetRequest(username: email, clientId: clientId)
+        sessionManager.request(APIRouter.resetPassword(resetRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Verifies a password change of a user.
+
+     - parameters:
+        - email: The user's e-mail address.
+        - password: The user's new password.
+        - confirmationCode: The confirmation code sent to the user's e-mail address.
+        - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func verifyResetPassword(email: String, password: String, confirmationCode: String, completion: @escaping (_ error: Error?) -> Void) {
+        let verifyRequest = VerifyPasswordResetRequest(username: email, password: password, confirmationCode: confirmationCode)
+        sessionManager.request(APIRouter.verifyResetPassword(verifyRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Verifies a new user.
+
+     - parameters:
+        - email: The user's e-mail address.
+        - confirmationCode: The confirmation code sent to the user's e-mail address.
+        - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func verifyUser(email: String, confirmationCode: String, completion: @escaping (_ error: Error?) -> Void) {
+        let confirmationRequest = UserConfirmationCodeRequest(email: email, confirmationCode: confirmationCode)
+        sessionManager.request(APIRouter.verifyUser(confirmationRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
+    }
+
+    /**
+     Resends a verification e-mail to new user.
+
+     - parameters:
+        - email: The user's e-mail address.
+        - completion: The handler called after a sign in attempt is completed.
+
+     */
+    public func resendUserVerification(email: String, completion: @escaping (_ error: Error?) -> Void) {
+        let resendRequest = ResendVerificationCodeRequest(email: email, clientId: clientId)
+        sessionManager.request(APIRouter.resendVerificationEmail(resendRequest)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            return completion(nil)
+        }
     }
 
     // MARK: - User CRUD
@@ -237,14 +321,32 @@ public class ThinCloud: OAuth2TokenDelegate {
     }
 
     /**
-     Updates a user.
+     Updates a the signed in user associated with the ThinCloud SDK instance.
 
      - parameters:
-        - user: The user to update.
+        - updates: The changes to the user.
         - completion: The handler called after a user update attempt is completed.
 
      */
-    public func updateUser(_ user: User, completion _: @escaping (_ error: Error?, _ user: User?) -> Void) {
+    public func updateUser(_ updates: UserUpdateRequest, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
+        sessionManager.request(APIRouter.updateUser(userId: "@me", updates)).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            guard let decodedUser = try? decoder.decode(User.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
+
+            self.currentUser = decodedUser
+            completion(nil, decodedUser)
+        }
     }
 
     /**
@@ -296,6 +398,109 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             completion(nil, decodedDevices)
+        }
+    }
+
+    /**
+     Fetches a specified device by its deviceId.
+
+     - parameters:
+        - deviceId: The ThinCloud generated device identifier.
+        - completion: The handler called after a device fetch attempt is completed.
+
+     */
+    public func getDevice(deviceId: String, completion: @escaping (_ error: Error?, _ device: Device?) -> Void) {
+        sessionManager.request(APIRouter.getDevice(deviceId: deviceId)).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            guard let decodedDevice = try? decoder.decode(Device.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
+
+            completion(nil, decodedDevice)
+        }
+    }
+
+    /**
+     Creates a device.
+
+     - parameters:
+        - device: The device to create.
+        - completion: The handler called after a device creation attempt is completed.
+
+     */
+    public func createDevice(device: DeviceCreateRequest, completion: @escaping (_ error: Error?, _ device: Device?) -> Void) {
+        sessionManager.request(APIRouter.createDevice(device)).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            guard let decodedDevice = try? decoder.decode(Device.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
+
+            completion(nil, decodedDevice)
+        }
+    }
+
+    /**
+     Updates a device.
+
+     - parameters:
+        - deviceId: The ThinCloud generated device identifier.
+        - updates: The changes to the device.
+        - completion: The handler called after a device update attempt is completed.
+
+     */
+    public func updateDevice(deviceId: String, updates: DeviceUpdateRequest, completion: @escaping (_ error: Error?, _ device: Device?) -> Void) {
+        sessionManager.request(APIRouter.updateDevice(deviceId: deviceId, updates)).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(.iso8601Full)
+            guard let decodedDevice = try? decoder.decode(Device.self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
+
+            completion(nil, decodedDevice)
+        }
+    }
+
+    /**
+     Deletes a device.
+
+     - parameters:
+        - deviceId: The ThinCloud generated device identifier.
+        - completion: The handler called after a device deletion attempt is completed.
+
+     */
+    public func deleteDevice(deviceId: String, completion: @escaping (_ error: Error?) -> Void) {
+        sessionManager.request(APIRouter.deleteDevice(deviceId: deviceId)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            completion(nil)
         }
     }
 
