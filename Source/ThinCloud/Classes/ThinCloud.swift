@@ -240,7 +240,7 @@ public class ThinCloud: OAuth2TokenDelegate {
 
      */
     public func verifyUser(email: String, confirmationCode: String, completion: @escaping (_ error: Error?) -> Void) {
-        let confirmationRequest = UserConfirmationCodeRequest(email: email, confirmationCode: confirmationCode, clientId: clientId)
+        let confirmationRequest = UserConfirmationCodeRequest(email: email, confirmationCode: confirmationCode)
         sessionManager.request(APIRouter.verifyUser(confirmationRequest)).validate().response { response in
             if let error = response.error {
                 return completion(error)

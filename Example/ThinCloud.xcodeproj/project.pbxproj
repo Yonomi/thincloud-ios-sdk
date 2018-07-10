@@ -16,7 +16,10 @@
 		20262AC920853F7500C77588 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262AC820853F7500C77588 /* DeviceViewController.swift */; };
 		20262ACB20853F7B00C77588 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262ACA20853F7B00C77588 /* ClientViewController.swift */; };
 		20262ACD20857CD800C77588 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20262ACC20857CD800C77588 /* InitialViewController.swift */; };
+		204C7C2220AA37140016AF78 /* VerifyUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C7C2120AA37140016AF78 /* VerifyUserViewController.swift */; };
 		205F88442075883700D326DE /* ExampleCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205F88432075883700D326DE /* ExampleCommandHandler.swift */; };
+		2060886820A4DB6100483CBA /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2060886720A4DB6100483CBA /* ResetPasswordViewController.swift */; };
+		2060886A20A4DB7A00483CBA /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2060886920A4DB7A00483CBA /* NewPasswordViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -47,7 +50,10 @@
 		20262AC820853F7500C77588 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		20262ACA20853F7B00C77588 /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		20262ACC20857CD800C77588 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		204C7C2120AA37140016AF78 /* VerifyUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyUserViewController.swift; sourceTree = "<group>"; };
 		205F88432075883700D326DE /* ExampleCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCommandHandler.swift; sourceTree = "<group>"; };
+		2060886720A4DB6100483CBA /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		2060886920A4DB7A00483CBA /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		20FB6F2D208698F400DAA96D /* ThinCloud_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThinCloud_Example.entitlements; sourceTree = "<group>"; };
 		30EF7C753F1987B2121FA691 /* Pods_ThinCloud_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThinCloud_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0518FA1F3406E21A65861D /* Pods-ThinCloud_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,9 +97,8 @@
 		20262AB52085071F00C77588 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				204C7C2020AA355B0016AF78 /* Onboarding */,
 				20262ACC20857CD800C77588 /* InitialViewController.swift */,
-				20262AB12084ECCB00C77588 /* SignInViewController.swift */,
-				20262AB32084ECD200C77588 /* SignUpViewController.swift */,
 				20262AB62085073C00C77588 /* DevicesTableViewController.swift */,
 				20262AC820853F7500C77588 /* DeviceViewController.swift */,
 				20262ABA2085075A00C77588 /* UserViewController.swift */,
@@ -109,6 +114,18 @@
 				20262AC620853C6900C77588 /* UIViewController+ErrorPresentation.swift */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		204C7C2020AA355B0016AF78 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				20262AB12084ECCB00C77588 /* SignInViewController.swift */,
+				20262AB32084ECD200C77588 /* SignUpViewController.swift */,
+				2060886720A4DB6100483CBA /* ResetPasswordViewController.swift */,
+				2060886920A4DB7A00483CBA /* NewPasswordViewController.swift */,
+				204C7C2120AA37140016AF78 /* VerifyUserViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		4BA33FE3CD07234AD6CD8EBD /* Pods */ = {
@@ -415,14 +432,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2060886A20A4DB7A00483CBA /* NewPasswordViewController.swift in Sources */,
 				20262ABB2085075A00C77588 /* UserViewController.swift in Sources */,
 				20262AC720853C6900C77588 /* UIViewController+ErrorPresentation.swift in Sources */,
 				20262ACD20857CD800C77588 /* InitialViewController.swift in Sources */,
+				2060886820A4DB6100483CBA /* ResetPasswordViewController.swift in Sources */,
 				20262AB22084ECCB00C77588 /* SignInViewController.swift in Sources */,
 				20262ACB20853F7B00C77588 /* ClientViewController.swift in Sources */,
 				205F88442075883700D326DE /* ExampleCommandHandler.swift in Sources */,
 				20262AB72085073C00C77588 /* DevicesTableViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				204C7C2220AA37140016AF78 /* VerifyUserViewController.swift in Sources */,
 				20262AB92085074800C77588 /* ClientsTableViewController.swift in Sources */,
 				20262AB42084ECD200C77588 /* SignUpViewController.swift in Sources */,
 				20262AC920853F7500C77588 /* DeviceViewController.swift in Sources */,

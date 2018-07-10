@@ -20,7 +20,6 @@ public struct UserUpdateRequest: Codable {
 struct UserConfirmationCodeRequest: Codable {
     let email: String
     let confirmationCode: String
-    let clientId: String
 }
 
 struct ResendVerificationCodeRequest: Codable {

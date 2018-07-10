@@ -126,6 +126,14 @@ enum APIRouter: URLRequestConvertible {
         switch self {
         case let .createAuthToken(authRequest):
             return try! encoder.encode(authRequest)
+        case let .resendVerificationEmail(resendRequest):
+            return try! encoder.encode(resendRequest)
+        case let .verifyUser(verifyRequest):
+            return try! encoder.encode(verifyRequest)
+        case let .resetPassword(resetRequest):
+            return try! encoder.encode(resetRequest)
+        case let .verifyResetPassword(verifyRequest):
+            return try! encoder.encode(verifyRequest)
         case let .createUser(userRequest):
             return try! encoder.encode(userRequest)
         case let .updateUser(_, userRequest):
