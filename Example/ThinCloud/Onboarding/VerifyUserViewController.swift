@@ -50,6 +50,7 @@ class VerifyUserViewController: UIViewController {
             }
 
             // SDK consumer is responsible for passing in an initial e-mail and password
+            
             ThinCloud.shared.signIn(email: email, password: password) { (error, _) in
                 self.isFormEnabled = true
 

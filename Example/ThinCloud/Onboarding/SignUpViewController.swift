@@ -49,6 +49,7 @@ class SignUpViewController: UIViewController {
             }
 
             // A user must verify their account before they can sign in.
+
             self.performSegue(withIdentifier: SignUpViewController.confirmationCodeSegueIdentifier, sender: sender)
         }
     }
