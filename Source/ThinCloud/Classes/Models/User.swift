@@ -12,9 +12,17 @@ struct UserRequest: Codable {
 
 /// Representation of a user update request to ThinCloud.
 public struct UserUpdateRequest: Codable {
-    let email: String?
-    let name: String?
-    let custom: [String: AnyCodable]?
+    /// The new e-mail address of the user.
+    public let email: String?
+    /// The new name of the user.
+    public let name: String?
+    /// The new key-value pairs of customer specified metadata.
+    public let custom: [String: AnyCodable]?
+    public init(email: String?, name: String?, custom: [String: AnyCodable]?) {
+        self.email = email
+        self.name = name
+        self.custom = custom
+    }
 }
 
 struct UserConfirmationCodeRequest: Codable {
