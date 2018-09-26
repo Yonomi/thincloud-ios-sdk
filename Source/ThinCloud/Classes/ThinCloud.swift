@@ -278,11 +278,12 @@ public class ThinCloud: OAuth2TokenDelegate {
         - name: The user's name.
         - email: The user's e-mail.
         - password: The user's password.
+        - custom: Key-value pairs of customer specified metadata.
         - completion: The handler called after a user creation attempt is completed.
 
     */
-    public func createUser(name: String, email: String, password: String, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
-        let user = UserRequest(email: email, name: name, password: password, custom: nil, userId: nil)
+    public func createUser(name: String, email: String, password: String, custom: [String: AnyCodable]? = nil, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
+        let user = UserRequest(email: email, name: name, password: password, custom: custom, userId: nil)
         sessionManager.request(APIRouter.createUser(user)).validate().response { response in
             if let error = response.error {
                 return completion(error, nil)
