@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.authors          = { 'Yonomi' => 'developer@yonomi.co' }
   s.source           = { :git => 'https://github.com/Yonomi/thincloud-ios-sdk.git', :tag => s.version.to_s }
 
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.ios.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
 

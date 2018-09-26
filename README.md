@@ -12,7 +12,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 - iOS 11.0+
 - tvOS 11.0+
 - Xcode 9.3+
-- Swift 4.1+
+- Swift 4.2+
 
 ## Installation
 

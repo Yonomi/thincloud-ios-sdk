@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var commandHandler: ExampleCommandHandler?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ThinCloud.shared.configure(instance: "your-instance", clientId: "your-client-id", apiKey: "your-api-key")
         ThinCloud.shared.virtualGateway.delegate = ExampleCommandHandler() // SDK consumer should bind a delegate that implements VirtualGatewayDelegate protocol
 

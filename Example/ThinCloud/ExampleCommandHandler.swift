@@ -15,7 +15,7 @@ class ExampleCommandHandler: VirtualGatewayDelegate {
             let notificationContent = UNMutableNotificationContent()
             notificationContent.title = "Incoming Virtual Gateway Command"
             notificationContent.body = "Device ID: \(command.deviceId) → Command ID: \(command.commandId)"
-            notificationContent.sound = UNNotificationSound.default()
+            notificationContent.sound = UNNotificationSound.default
 
             let notification = UNNotificationRequest(identifier: "\(command.deviceId)-\(command.commandId)", content: notificationContent, trigger: nil)
 
