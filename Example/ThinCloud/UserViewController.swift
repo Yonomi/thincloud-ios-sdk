@@ -19,7 +19,7 @@ class UserViewController: UIViewController {
 
         user = ThinCloud.shared.currentUser
 
-        nameLabel.text = "Name: \(user.name)"
+        nameLabel.text = "Name: \(user.name ?? "No Name")"
         emailLabel.text = "E-mail: \(user.email)"
         idLabel.text = "userId: \(user.userId)"
     }
