@@ -54,6 +54,7 @@
 		205F88432075883700D326DE /* ExampleCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCommandHandler.swift; sourceTree = "<group>"; };
 		2060886720A4DB6100483CBA /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		2060886920A4DB7A00483CBA /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
+		20EF9392215C377C00B6DCC1 /* ThinCloudPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ThinCloudPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		20FB6F2D208698F400DAA96D /* ThinCloud_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThinCloud_Example.entitlements; sourceTree = "<group>"; };
 		30EF7C753F1987B2121FA691 /* Pods_ThinCloud_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThinCloud_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0518FA1F3406E21A65861D /* Pods-ThinCloud_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThinCloud_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				20EF9392215C377C00B6DCC1 /* ThinCloudPlayground.playground */,
 			);
 			name = "Example for ThinCloud";
 			path = ThinCloud;
