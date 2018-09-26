@@ -373,6 +373,93 @@ public class ThinCloud: OAuth2TokenDelegate {
         }
     }
 
+    // MARK: - User File Storage
+
+    /**
+     Fetches all file names associated with the current user.
+
+     - parameters:
+        - completion: The handler called after a file name fetch attempt is completed.
+
+     */
+    public func getUserFileNames(completion: @escaping (_ error: Error?, _ fileNames: [String]?) -> Void) {
+        sessionManager.request(APIRouter.getUserFileNames(userId: "@me")).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            let decoder = JSONDecoder()
+            guard let decodedFileNames = try? decoder.decode([String].self, from: data) else {
+                return completion(ThinCloudError.deserializationError, nil)
+            }
+
+            completion(nil, decodedFileNames)
+        }
+    }
+
+    /**
+     Fetches a specified file by its name.
+
+     - parameters:
+        - fileName: The name of the file.
+        - completion: The handler called after a file fetch attempt is completed.
+
+     */
+    public func getUserFile(fileName: String, completion: @escaping (_ error: Error?, _ file: Data?) -> Void) {
+        sessionManager.request(APIRouter.getUserFile(userId: "@me", fileName: fileName)).validate().response { response in
+            if let error = response.error {
+                return completion(error, nil)
+            }
+
+            guard let data = response.data else {
+                return completion(ThinCloudError.responseError, nil)
+            }
+
+            completion(nil, data)
+        }
+    }
+
+    /**
+     Stores generic data as a file.
+
+     - parameters:
+        - fileName: The name of the file.
+        - file: The data to be stored.
+        - completion: The handler called after a file update attempt is completed.
+
+     */
+    public func putUserFile(fileName: String, file: Data, completion: @escaping (_ error: Error?) -> Void) {
+        sessionManager.request(APIRouter.putUserFile(userId: "@me", fileName: fileName, file: file)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            completion(nil)
+        }
+    }
+
+    /**
+     Deletes a file.
+
+     - parameters:
+        - fileName: The name of the file.
+        - completion: The handler called after a file delete attempt is completed.
+
+     */
+    public func deleteUserFile(fileName: String, completion: @escaping (_ error: Error?) -> Void) {
+        sessionManager.request(APIRouter.deleteUserFile(userId: "@me", fileName: fileName)).validate().response { response in
+            if let error = response.error {
+                return completion(error)
+            }
+
+            completion(nil)
+        }
+    }
+
     // MARK: - Device CRUD
 
     /**

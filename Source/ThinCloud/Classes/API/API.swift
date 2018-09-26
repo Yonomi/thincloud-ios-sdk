@@ -20,6 +20,10 @@ enum APIRouter: URLRequestConvertible {
     case verifyUser(UserConfirmationCodeRequest)
     case resetPassword(PasswordResetRequest)
     case verifyResetPassword(VerifyPasswordResetRequest)
+    case getUserFileNames(userId: String)
+    case getUserFile(userId: String, fileName: String)
+    case putUserFile(userId: String, fileName: String, file: Data)
+    case deleteUserFile(userId: String, fileName: String)
 
     // Client
     case getClients()
@@ -54,11 +58,14 @@ enum APIRouter: URLRequestConvertible {
         case .getClient,
              .getClients,
              .getUser,
+             .getUserFileNames,
+             .getUserFile,
              .getDevice,
              .getDevices,
              .getDeviceCommands:
             return .get
         case .updateUser,
+             .putUserFile,
              .updateClient,
              .updateDevice,
              .updateDeviceCommands,
@@ -66,7 +73,8 @@ enum APIRouter: URLRequestConvertible {
             return .put
         case .deleteClient,
              .deleteDevice,
-             .deleteUser:
+             .deleteUser,
+             .deleteUserFile:
             return .delete
         }
     }
@@ -109,6 +117,12 @@ enum APIRouter: URLRequestConvertible {
         case let .updateDeviceCommands(deviceId, commandId),
              let .updateDeviceCommandsState(deviceId, commandId, _):
             return "devices/\(deviceId)/commands/\(commandId)"
+        case let .getUserFileNames(userId):
+            return "users/\(userId)/files"
+        case let .getUserFile(userId, fileName),
+             let .putUserFile(userId, fileName, _),
+             let .deleteUserFile(userId, fileName):
+            return "users/\(userId)/files/\(fileName)"
         }
     }
 
@@ -146,6 +160,8 @@ enum APIRouter: URLRequestConvertible {
             return try! encoder.encode(stateRequest)
         case let .createClient(clientRequest):
             return try! encoder.encode(clientRequest)
+        case let .putUserFile(_, _, file):
+            return file
         default:
             return nil
         }
@@ -163,8 +179,13 @@ enum APIRouter: URLRequestConvertible {
 
         urlRequest.setValue(ThinCloud.shared.apiKey, forHTTPHeaderField: "x-api-key")
 
-        if urlRequest.httpBody != nil {
-            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        switch self {
+        case .putUserFile:
+            break // User files don't have to be application/json
+        default:
+            if urlRequest.httpBody != nil {
+                urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            }
         }
 
         return urlRequest
