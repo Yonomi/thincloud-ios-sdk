@@ -111,7 +111,7 @@ enum APIRouter: URLRequestConvertible {
         case let .getDevice(deviceId),
              let .updateDevice(deviceId, _),
              let .deleteDevice(deviceId):
-            return "devices\(deviceId)"
+            return "devices/\(deviceId)"
         case let .getDeviceCommands(deviceId, _):
             return "devices/\(deviceId)/commands"
         case let .updateDeviceCommands(deviceId, commandId),
