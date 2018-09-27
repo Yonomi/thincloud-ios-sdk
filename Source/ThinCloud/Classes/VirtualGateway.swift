@@ -120,9 +120,11 @@ public class VirtualGateway {
 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-                guard let pendingDeviceCommands = try? decoder.decode([DeviceCommandResponse].self, from: data) else {
+                guard var pendingDeviceCommands = try? decoder.decode([DeviceCommandResponse].self, from: data) else {
                     return completionHandler(.failed)
                 }
+
+                pendingDeviceCommands = pendingDeviceCommands.filter { $0.name != "_update" }
 
                 let ackDispatchGroup = DispatchGroup()
 
