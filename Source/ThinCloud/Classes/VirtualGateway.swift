@@ -38,7 +38,7 @@ public protocol VirtualGatewayDelegate: class {
         - commands: The incoming commands.
         - completionHandler: The handler called after processing incoming commands.
      */
-    func virtualGatewayDidReceiveCommands(_ commands: [DeviceCommand], completionHandler: (_ updatedCommands: [DeviceCommand]) -> Void)
+    func virtualGatewayDidReceiveCommands(_ commands: [DeviceCommand], completionHandler: @escaping (_ updatedCommands: [DeviceCommand]) -> Void)
 }
 
 /// The ThinCloud Virtual Gateway wraps APNs to provide command forwarding for your devices.
