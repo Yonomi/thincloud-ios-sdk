@@ -181,7 +181,7 @@ enum APIRouter: URLRequestConvertible {
 
         switch self {
         case .putUserFile:
-            break // User files don't have to be application/json
+            urlRequest.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
         default:
             if urlRequest.httpBody != nil {
                 urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
