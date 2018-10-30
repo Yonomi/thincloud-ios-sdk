@@ -26,7 +26,3 @@ pod 'ThinCloud'
 ## Author
 
 Alex Patterson, alex@yonomi.co
-
-## License
-
-Copyright (c) 2018 Yonomi, Inc. All rights reserved.
