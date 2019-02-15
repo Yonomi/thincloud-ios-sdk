@@ -293,14 +293,17 @@ public class ThinCloud: OAuth2TokenDelegate {
         - completion: The handler called after a user creation attempt is completed.
 
     */
-    public func createUser(name: String, email: String, password: String, custom: [String: AnyCodable]? = nil, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
+    public func createUser(name: String, email: String, password: String, custom: [String: AnyCodable]? = nil, completion: @escaping (_ error: Error?) -> Void) {
         let user = UserRequest(email: email, name: name, password: password, custom: custom, userId: nil)
         sessionManager.request(APIRouter.createUser(user)).validate().response { response in
-            if let error = response.error {
-                return completion(error, nil)
+            if response.error != nil, let data = response.data {
+                let decoder = JSONDecoder()
+                if let decodedError = try? decoder.decode(ThinCloudRequestError.self, from: data) {
+                    return completion(decodedError)
+                }
             }
 
-            return completion(nil, nil)
+            return completion(response.error)
         }
     }
 

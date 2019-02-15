@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController {
 
         isFormEnabled = false
 
-        ThinCloud.shared.createUser(name: name, email: email, password: password) { error, _ in
+        ThinCloud.shared.createUser(name: name, email: email, password: password) { error in
             if let error = error {
                 self.isFormEnabled = true
                 return self.presentError(title: "Error Creating User", description: error.localizedDescription)
