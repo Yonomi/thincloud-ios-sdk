@@ -3,7 +3,7 @@ PODS:
   - Nimble (7.3.4)
   - Quick (1.3.4)
   - SwiftLint (0.30.1)
-  - ThinCloud (0.3.2):
+  - ThinCloud (0.3.3):
     - Alamofire (~> 4.8.1)
 
 DEPENDENCIES:
@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
   SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
-  ThinCloud: 6352c27ef12b7fb6d8050fcb4d340071a6b280d6
+  ThinCloud: 21f72cdc43ae246d040b1e2a3727e6c90dfa8e1c
 
 PODFILE CHECKSUM: b874686477664a4c597fe7569fdaa168f13747b2
 
