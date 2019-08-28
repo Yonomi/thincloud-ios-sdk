@@ -24,4 +24,6 @@ public enum ThinCloudError: Error {
     case deserializationError
     /// An unknown error ocurred.
     case unknownError
+    /// A call was made to an account that is not verified.
+    case accountNotVerified(String)
 }

@@ -34,7 +34,6 @@ public class ThinCloud: OAuth2TokenDelegate {
 
     /// The ThinCloud deployment used.
     public private(set) var instance: String!
-
     /// The ThinCloud OAuth client key.
     var clientId: String!
 
@@ -295,15 +294,8 @@ public class ThinCloud: OAuth2TokenDelegate {
     */
     public func createUser(name: String, email: String, password: String, custom: [String: AnyCodable]? = nil, completion: @escaping (_ error: Error?) -> Void) {
         let user = UserRequest(email: email, name: name, password: password, custom: custom, userId: nil)
-        sessionManager.request(APIRouter.createUser(user)).validate().response { response in
-            if response.error != nil, let data = response.data {
-                let decoder = JSONDecoder()
-                if let decodedError = try? decoder.decode(ThinCloudRequestError.self, from: data) {
-                    return completion(decodedError)
-                }
-            }
-
-            return completion(response.error)
+        sessionManager.request(APIRouter.createUser(user)).validate(statusCode: 200..<500).response { response in
+            return completion(self.validateUserError(response))
         }
     }
 
@@ -632,6 +624,30 @@ public class ThinCloud: OAuth2TokenDelegate {
             }
 
             completion(nil, decodedClients)
+        }
+    }
+    
+    private func validateUserError(_ response: DefaultDataResponse) -> Error? {
+        guard let httpResponse = response.response, let data = response.data else {
+            return ThinCloudError.responseError
+        }
+
+        switch httpResponse.statusCode {
+        case 200..<400:
+            return nil
+        case 400..<500:
+            let decoder = JSONDecoder()
+            if let decodedError = try? decoder.decode(ThinCloudRequestError.self, from: data), let description = decodedError.errorDescription {
+                if description.contains("UserNotConfirmedException") {
+                    return ThinCloudError.accountNotVerified(decodedError.message)
+                } else {
+                    return ThinCloudError.notAuthenticated
+                }
+            } else {
+                return ThinCloudError.responseError
+            }
+        default:
+            return ThinCloudError.unknownError
         }
     }
 }
