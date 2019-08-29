@@ -148,8 +148,12 @@ public class ThinCloud: OAuth2TokenDelegate {
      */
     public func signIn(email: String, password: String, completion: @escaping (_ error: Error?, _ user: User?) -> Void) {
         let oauthRequest = OAuth2Request(grantType: .password, clientId: clientId, username: email, password: password)
-        sessionManager.request(APIRouter.createAuthToken(oauthRequest)).validate().response { response in
+        sessionManager.request(APIRouter.createAuthToken(oauthRequest)).validate(statusCode: 200..<500).response { response in
             if let error = response.error {
+                return completion(error, nil)
+            }
+            
+            if let error = self.validateUserError(response) {
                 return completion(error, nil)
             }
 
