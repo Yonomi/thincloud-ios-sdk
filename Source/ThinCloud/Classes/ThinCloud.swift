@@ -153,7 +153,7 @@ public class ThinCloud: OAuth2TokenDelegate {
                 return completion(error, nil)
             }
             
-            if let error = self.validateUserError(response) {
+            if let error = self.validateErrorResponse(response) {
                 return completion(error, nil)
             }
 
@@ -299,7 +299,7 @@ public class ThinCloud: OAuth2TokenDelegate {
     public func createUser(name: String, email: String, password: String, custom: [String: AnyCodable]? = nil, completion: @escaping (_ error: Error?) -> Void) {
         let user = UserRequest(email: email, name: name, password: password, custom: custom, userId: nil)
         sessionManager.request(APIRouter.createUser(user)).validate(statusCode: 200..<500).response { response in
-            return completion(self.validateUserError(response))
+            return completion(self.validateErrorResponse(response))
         }
     }
 
@@ -372,9 +372,9 @@ public class ThinCloud: OAuth2TokenDelegate {
             return completion(ThinCloudError.notAuthenticated) // need a descriptive error here
         }
 
-        sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId)).validate().response { response in
-            if let error = response.error {
-                return completion(error)
+        sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId)).validate(statusCode: 200..<500).response { response in
+            if let error = self.validateUserError(response) {
+                return completion(error, nil)
             }
 
             self.signOut()
@@ -631,7 +631,7 @@ public class ThinCloud: OAuth2TokenDelegate {
         }
     }
     
-    private func validateUserError(_ response: DefaultDataResponse) -> Error? {
+    private func validateErrorResponse(_ response: DefaultDataResponse) -> Error? {
         guard let httpResponse = response.response, let data = response.data else {
             return ThinCloudError.responseError
         }
