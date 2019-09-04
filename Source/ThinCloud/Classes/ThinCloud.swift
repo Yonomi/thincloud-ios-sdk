@@ -373,8 +373,8 @@ public class ThinCloud: OAuth2TokenDelegate {
         }
 
         sessionManager.request(APIRouter.deleteUser(userId: currentUser.userId)).validate(statusCode: 200..<500).response { response in
-            if let error = self.validateUserError(response) {
-                return completion(error, nil)
+            if let error = self.validateErrorResponse(response) {
+                return completion(error)
             }
 
             self.signOut()

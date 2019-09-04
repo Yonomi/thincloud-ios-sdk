@@ -375,7 +375,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ThinCloud/ThinCloud.framework",
 			);
@@ -386,7 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThinCloud_Example/Pods-ThinCloud_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		83A88C277221A628A99B5CDB /* [CP] Embed Pods Frameworks */ = {
@@ -395,7 +395,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -406,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThinCloud_Tests/Pods-ThinCloud_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F740E2C9B553804828E1A830 /* [CP] Check Pods Manifest.lock */ = {
