@@ -45,7 +45,15 @@ class SignUpViewController: UIViewController {
         ThinCloud.shared.createUser(name: name, email: email, password: password) { error in
             if let error = error {
                 self.isFormEnabled = true
-                return self.presentError(title: "Error Creating User", description: error.localizedDescription)
+                let title: String = "Error Creating User"
+                var description: String
+                switch error {
+                case ThinCloudError.accountAlreadyExists:
+                    description = "Account already exists"
+                default:
+                    description = "An unknown error occurred"
+                }
+                return self.presentError(title: title, description: description)
             }
 
             // A user must verify their account before they can sign in.

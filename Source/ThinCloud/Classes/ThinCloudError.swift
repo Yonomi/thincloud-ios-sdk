@@ -26,4 +26,6 @@ public enum ThinCloudError: Error {
     case unknownError
     /// A call was made to an account that is not verified.
     case accountNotVerified(String)
+    /// A call was made to an account that already exists.
+    case accountAlreadyExists
 }
