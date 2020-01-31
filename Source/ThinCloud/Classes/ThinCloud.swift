@@ -644,6 +644,8 @@ public class ThinCloud: OAuth2TokenDelegate {
             if let decodedError = try? decoder.decode(ThinCloudRequestError.self, from: data), let description = decodedError.errorDescription {
                 if description.contains("UserNotConfirmedException") {
                     return ThinCloudError.accountNotVerified(decodedError.message)
+                } else if description.contains("UsernameExistsException") {
+                    return ThinCloudError.accountAlreadyExists
                 } else {
                     return ThinCloudError.notAuthenticated
                 }
